@@ -1,0 +1,18 @@
+.page{
+    background-color: black;
+    color: white;
+}
+.page__section {
+    position: relative;
+    max-width: 880px;
+    width: 100%;
+    margin: 0 auto;
+  }
+  
+  @media screen and (max-width: 595px) {
+    .page__section {
+      margin-right: 0;
+      margin-left: 19px;
+    }
+  }
+  
