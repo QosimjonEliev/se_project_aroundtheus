@@ -1,55 +1,58 @@
-.card {
-    display: flex;
-    flex-direction: column;
-    list-style: none;
-    border-radius: 10px;
+.card{
+display: flex;
+flex-direction: column;
+list-style: none;
+border-radius: 10px; 
+}
+
+.card__list{
+ display: grid;
+ justify-content: center;
+ grid-template-columns: repeat(auto-fit, 282px);
+ grid-gap: 20px 17px;
+ padding: 0;
+ margin: 0;
+
+}
+
+.card__descraption{
+display: flex;
+background-color: white;
+color: black;
+padding: 25px 30px 25px 20px;
+align-items: center;
+justify-content: space-between;
+border-bottom-right-radius: 10px;
+border-bottom-left-radius: 10px;
+text-overflow: ellipsis;
+}
+
+.card__like-button{
+background: transparent url(../images/like\ button.svg) center no-repeat;
+width: 21px;
+height: 18px;
+border: none;
+}
+
+.card__image{
+ width: 282px;
+ height: 282px;
+ border-top-left-radius: 10px;
+ border-top-right-radius: 10px;
+
+}
+.card__like-button:hover{
+    opacity: 0.5;
+}
+
+.card__title {
+    text-overflow: ellipsis;
+    white-space: nowrap;
     overflow: hidden;
-  }
-  
-  .card__image {
-    width: 282px;
-    height: 282px;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-  }
-  
-  .card__description {
-    display: flex;
-    background-color: #f2f2f2;
-    color: black;
-    padding-top: 20px;
-    padding-bottom: 25px;
-    padding-left: 25px;
-    padding-right: 20px;
-    align-items: center;
-    justify-content: space-between;
-  }
-  
-  .card__title {
-    font-family: "Inter", Arial, sans-serif;
+    font-family: Inter, Arial, sans-serif;
     font-style: normal;
     font-weight: 900;
     font-size: 24px;
     line-height: 29px;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
     margin: 0;
   }
-  
-  .card__like-button {
-    background-image: url(../images/like\ button.svg);
-    background-position: center;
-    height: 18px;
-    width: 21px;
-    border: none;
-    border-radius: 0 0 10px;
-    transition: opacity 0.35s;
-    flex-shrink: 0;
-  }
-  
-  .card__like-button:hover {
-    opacity: 0.5;
-    cursor: pointer;
-  }
-  

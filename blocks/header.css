@@ -1,7 +1,7 @@
 .header {
-    background-color: black;
     max-width: 880px;
     min-height: 33px;
+    background-color: black;
     color: white;
     padding-top: 42px;
     border-bottom: 1px solid rgba(84, 84, 84, 0.7);

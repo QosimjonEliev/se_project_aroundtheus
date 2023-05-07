@@ -1,15 +1,22 @@
 .page{
     background-color: black;
     color: white;
+} 
+
+.page__content{
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
-.page__section {
-    position: relative;
+
+.page__section{
     max-width: 880px;
     width: 100%;
+    position: relative;
     margin: 0 auto;
-  }
-  
-  @media screen and (max-width: 595px) {
+}
+
+@media screen and (max-width: 595px) {
     .page__section {
       margin-right: 0;
       margin-left: 19px;
