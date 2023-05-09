@@ -14,7 +14,6 @@
   justify-content: space-between;
   border-bottom-right-radius: 10px;
   border-bottom-left-radius: 10px;
-  text-overflow: ellipsis;
 }
 
 .card__like-button {
@@ -22,6 +21,7 @@
   width: 21px;
   height: 18px;
   border: none;
+  cursor: pointer;
 }
 
 .card__image {
