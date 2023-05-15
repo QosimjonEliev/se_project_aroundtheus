@@ -1,5 +1,4 @@
 # Project 3: Around The U.S.
-# GitHub: git@github.com:QosimjonEliev/se_project_aroundtheus.git
 # Github URL: https://github.com/QosimjonEliev/se_project_aroundtheus
 ### Overview  
 
