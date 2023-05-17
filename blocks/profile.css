@@ -11,6 +11,9 @@
     "title button"
     "description description";
   grid-template-columns: minmax(auto, 373px) auto;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .profile__edit-button {
@@ -57,16 +60,14 @@
 }
 
 .profile__description {
-  font-family: "Inter", Arial, sans-serif;
+  font-family: "Inter", sans-serif;
+  font-style: normal;
+  font-weight: 400;
   font-size: 18px;
   line-height: 22px;
-  font-weight: 400;
-  grid-area: description;
+  max-width: 373px;
   margin: 0;
-  padding-top: 7px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  grid-area: description;
 }
 
 .profile__image {
