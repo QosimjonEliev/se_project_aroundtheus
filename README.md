@@ -1,5 +1,6 @@
 # Project 3: Around The U.S.
-# Github link: https://github.com/QosimjonEliev/se_project_aroundtheus
+# Github URL: https://github.com/QosimjonEliev/se_project_aroundtheus
+# Github link: https://qosimjoneliev.github.io/se_project_aroundtheus/
 ### Overview  
 
 * Intro
