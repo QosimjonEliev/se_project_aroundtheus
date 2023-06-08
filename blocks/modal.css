@@ -57,7 +57,7 @@
     flex-direction: column;
   }
 
-  .modal__title{
+  .modal__name{
    font-family: "Inter", Arial, sans-serif;
    font-weight: 400;
    font-size: 14px;

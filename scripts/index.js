@@ -27,33 +27,42 @@ const initialCards = [
 
 console.log(initialCards);
 
+const modals = Array.from(document.querySelectorAll(".modal"));
+
 const profileEditButton = document.querySelector("#profile-edit-button");
 const profileEditModal = document.querySelector("#profile-edit-modal");
 const profileEditCloseButton = profileEditModal.querySelector("#modal-close-button");
-const profileTitle = document.querySelector(".profile__title");
+const profileTitle = document.querySelector(".profile__name");
 const profileDescription = document.querySelector(".profile__description");
-const profileTitleInput = document.querySelector("#profile-title-input");
+const profileTitleInput = document.querySelector("#profile-name-input");
 const profileDescriptionInput = document.querySelector(
   "#profile-description-input");
 const profileEditForm = profileEditModal.querySelector(".modal__form");
 //Add card
+const addNewCardButton = document.querySelector(".profile__add-button");
 const addCardModal = document.querySelector("#add-card-modal");
-const addCardButton = document.querySelector("#add-card-button");
-const addCardCloseButton = addCardModal.querySelector("#modal-close-button");
-const addCardTitleInput = addCardModal.querySelector("#add-card-title-input");
-const addCardImageLinkInput = document.querySelector("#add-card-link-input");
-const addCardForm = addCardModal.querySelector("#add-card-form");
-const addCardSaveButton = addCardModal.querySelector(".modal__save-button");
-
+const addCardModalCloseButton = addCardModal.querySelector("#modal-close-button");
 
 
 const cardListEl = document.querySelector(".cards__list");
 const cardTemplate =
   document.querySelector("#card-template").content.firstElementChild;
 /*Functions*/
-function closePopop(){
- profileEditModal.classList.remove("modal_opened");
+function closePopop(modal){
+  modal.classList.remove("modal_opened");
+ }
+
+//function openPopop(){
+//profileTitleInput.value = profileTitle.textContent;
+//profileDescriptionInput.value = profileDescription.textContent;
+
+//profileEditModal.classList.add("modal_opened");
+//}
+
+function openPopop(modal){
+  modal.classList.add("modal_opened");
 }
+
 
 function getCardElement(cardData) {
  //clone the template element with all its content and store it 
@@ -87,8 +96,14 @@ function handleProfileEditSubmit(e) {
   profileEditModal.classList.add("modal_opened");
 });
 
-profileEditCloseButton.addEventListener("click", closePopop);
 profileEditForm.addEventListener("submit", handleProfileEditSubmit);
+profileEditButton.addEventListener("click", () => openPopop (profileEditModal));
+profileEditCloseButton.addEventListener("click", () => closePopop (profileEditModal));
+
+//add new card button
+addNewCardButton.addEventListener("click", () => openPopop(addCardModal));
+addCardModalCloseButton.addEventListener("click", () => closePopop(addCardModal));
+
 
 initialCards.forEach((cardData) => {
   const cardElement = getCardElement(cardData);

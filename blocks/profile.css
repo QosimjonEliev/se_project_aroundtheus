@@ -45,7 +45,7 @@
   cursor: pointer;
   transition: 0.1s;
 }
-.profile__title {
+.profile__name {
   font-family: "Inter", Arial, sans-serif;
   font-style: normal;
   text-align: center;
