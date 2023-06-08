@@ -31,26 +31,32 @@ const modals = Array.from(document.querySelectorAll(".modal"));
 
 const profileEditButton = document.querySelector("#profile-edit-button");
 const profileEditModal = document.querySelector("#profile-edit-modal");
-const profileEditCloseButton = profileEditModal.querySelector("#modal-close-button");
+const profileEditCloseButton = profileEditModal.querySelector(
+  "#modal-edit-close-button"
+);
 const profileTitle = document.querySelector(".profile__name");
 const profileDescription = document.querySelector(".profile__description");
 const profileTitleInput = document.querySelector("#profile-name-input");
 const profileDescriptionInput = document.querySelector(
-  "#profile-description-input");
+  "#profile-description-input"
+);
 const profileEditForm = profileEditModal.querySelector(".modal__form");
 //Add card
 const addNewCardButton = document.querySelector(".profile__add-button");
 const addCardModal = document.querySelector("#add-card-modal");
-const addCardModalCloseButton = addCardModal.querySelector("#modal-close-button");
-
+const addCardCloseButton = addCardModal.querySelector(
+  "#modal-card-close-button"
+);
+const addCardTitleInput = document.querySelector("#add-card-title-input");
+const addCardUrlInput = document.querySelector("#add-card-link-input");
 
 const cardListEl = document.querySelector(".cards__list");
 const cardTemplate =
   document.querySelector("#card-template").content.firstElementChild;
 /*Functions*/
-function closePopop(modal){
+function closePopop(modal) {
   modal.classList.remove("modal_opened");
- }
+}
 
 //function openPopop(){
 //profileTitleInput.value = profileTitle.textContent;
@@ -59,25 +65,24 @@ function closePopop(modal){
 //profileEditModal.classList.add("modal_opened");
 //}
 
-function openPopop(modal){
+function openPopop(modal) {
   modal.classList.add("modal_opened");
 }
 
-
 function getCardElement(cardData) {
- //clone the template element with all its content and store it 
- const cardElement = cardTemplate.cloneNode(true);
- //access the card title and image and store them in variables
- const cardTitleEl = cardElement.querySelector(".card__title");
- const cardImageEl = cardElement.querySelector(".card__image");
- //set the path to the image to the link field of the object
- cardImageEl.src = cardData.link;
- //set the image alt text to the name field of the object
- cardImageEl.alt = cardData.name;
- //set the card title to the name field of the object, too
- cardTitleEl.textContent = cardData.name;
- //return the ready HTML element with the filled-in datafunction closePopup() {
- return cardElement;
+  //clone the template element with all its content and store it
+  const cardElement = cardTemplate.cloneNode(true);
+  //access the card title and image and store them in variables
+  const cardTitleEl = cardElement.querySelector(".card__title");
+  const cardImageEl = cardElement.querySelector(".card__image");
+  //set the path to the image to the link field of the object
+  cardImageEl.src = cardData.link;
+  //set the image alt text to the name field of the object
+  cardImageEl.alt = cardData.name;
+  //set the card title to the name field of the object, too
+  cardTitleEl.textContent = cardData.name;
+  //return the ready HTML element with the filled-in datafunction closePopup() {
+  return cardElement;
 }
 
 /*Event Handlers*/
@@ -89,7 +94,7 @@ function handleProfileEditSubmit(e) {
 }
 
 /*Event Listners*/
-  profileEditButton.addEventListener("click", () => {
+profileEditButton.addEventListener("click", () => {
   profileTitleInput.value = profileTitle.textContent;
   profileDescriptionInput.value = profileDescription.textContent;
 
@@ -97,16 +102,18 @@ function handleProfileEditSubmit(e) {
 });
 
 profileEditForm.addEventListener("submit", handleProfileEditSubmit);
-profileEditButton.addEventListener("click", () => openPopop (profileEditModal));
-profileEditCloseButton.addEventListener("click", () => closePopop (profileEditModal));
+profileEditButton.addEventListener("click", () => openPopop(profileEditModal));
+profileEditCloseButton.addEventListener("click", () =>
+  closePopop(profileEditModal)
+);
 
 //add new card button
 addNewCardButton.addEventListener("click", () => openPopop(addCardModal));
-addCardModalCloseButton.addEventListener("click", () => closePopop(addCardModal));
-
+addCardCloseButton.addEventListener("click", () =>
+  closePopop(addCardModal)
+);
 
 initialCards.forEach((cardData) => {
   const cardElement = getCardElement(cardData);
   cardListEl.prepend(cardElement);
 });
-
