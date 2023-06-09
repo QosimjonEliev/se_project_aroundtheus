@@ -57,6 +57,11 @@
     flex-direction: column;
   }
 
+  .modal_add-card-form{
+    display: flex;
+    flex-direction: column;
+  }
+
   .modal__name{
    font-family: "Inter", Arial, sans-serif;
    font-weight: 400;
