@@ -45,11 +45,19 @@ const addNewCardButton = document.querySelector(".profile__add-button");
 const addCardModal = document.querySelector("#add-card-modal");
 const addCardForm = document.querySelector("#modal_add-card-form");
 const addCardCloseButton = addCardModal.querySelector(
-  "#modal-card-close-button");
+  "#modal-card-close-button"
+);
 const addCardTitleInput = document.querySelector("#add-card-title-input");
 const addCardUrlInput = document.querySelector("#add-card-link-input");
+//preview Image
+const imgPreviewModal = document.querySelector("#preview-image-modal");
+const imagePreview = imgPreviewModal.querySelector(".modal__image-preview");
+const imgPreviewCloseButton = imgPreviewModal.querySelector(
+  "#modal-preview-close-button"
+);
+const imgPreviewTitle = document.querySelector(".modal__image-title");
 
-const cardListEl = document.querySelector(".cards__list");
+const cardsWrap = document.querySelector(".cards__list");
 const cardTemplate =
   document.querySelector("#card-template").content.firstElementChild;
 /*Functions*/
@@ -57,30 +65,39 @@ function closePopop(modal) {
   modal.classList.remove("modal_opened");
 }
 
-//function openPopop(){
-//profileTitleInput.value = profileTitle.textContent;
-//profileDescriptionInput.value = profileDescription.textContent;
-
-//profileEditModal.classList.add("modal_opened");
-//}
-
 function openPopop(modal) {
   modal.classList.add("modal_opened");
 }
 
+function renderCard(cardData) {
+  const cardElement = getCardElement(cardData);
+  cardsWrap.prepend(cardElement);
+}
+
 function getCardElement(cardData) {
-  //clone the template element with all its content and store it
   const cardElement = cardTemplate.cloneNode(true);
-  //access the card title and image and store them in variables
   const cardTitleEl = cardElement.querySelector(".card__title");
   const cardImageEl = cardElement.querySelector(".card__image");
-  //set the path to the image to the link field of the object
   cardImageEl.src = cardData.link;
-  //set the image alt text to the name field of the object
   cardImageEl.alt = cardData.name;
-  //set the card title to the name field of the object, too
   cardTitleEl.textContent = cardData.name;
-  //return the ready HTML element with the filled-in datafunction closePopup() {
+  const likeButton = cardElement.querySelector(".card__like-button");
+  likeButton.addEventListener("click", () => {
+    likeButton.classList.toggle("card__like-button_active");
+  });
+
+  const deleteButton = cardElement.querySelector(".card__delete-button");
+  deleteButton.addEventListener("click", () => {
+    cardElement.remove();
+  });
+
+  cardImageEl.addEventListener("click", () => {
+    imagePreview.src = cardData.link;
+    imagePreview.alt = cardData.name;
+    imgPreviewTitle.textContent = cardData.name;
+    openPopop(document.querySelector("#preview-image-modal"));
+  });
+
   return cardElement;
 }
 
@@ -89,7 +106,7 @@ function handleProfileEditSubmit(e) {
   e.preventDefault();
   profileTitle.textContent = profileTitleInput.value;
   profileDescription.textContent = profileDescriptionInput.value;
-  closePopop();
+  closePopop(profileEditModal);
 }
 
 /*Event Listners*/
@@ -104,8 +121,8 @@ function handleAddCardFormSubmit(evt) {
   evt.preventDefault();
   const name = addCardTitleInput.value;
   const link = addCardUrlInput.value;
-  renderCard({name, link}, cardsWrap);
-  closeModal(addCardModal);
+  renderCard({ name, link }, cardsWrap);
+  closePopop(addCardModal);
 }
 
 profileEditForm.addEventListener("submit", handleProfileEditSubmit);
@@ -117,10 +134,8 @@ profileEditCloseButton.addEventListener("click", () =>
 //add new card button
 addCardForm.addEventListener("submit", handleAddCardFormSubmit);
 addNewCardButton.addEventListener("click", () => openPopop(addCardModal));
-addCardCloseButton.addEventListener("click", () =>
-closePopop(addCardModal)
-);
+addCardCloseButton.addEventListener("click", () => closePopop(addCardModal));
 initialCards.forEach((cardData) => {
   const cardElement = getCardElement(cardData);
-  cardListEl.prepend(cardElement);
+  cardsWrap.prepend(cardElement);
 });
