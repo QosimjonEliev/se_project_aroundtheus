@@ -131,6 +131,10 @@ profileEditCloseButton.addEventListener("click", () =>
   closePopop(profileEditModal)
 );
 
+imgPreviewCloseButton.addEventListener("click", () =>{
+  closePopop(imgPreviewModal);
+});
+
 //add new card button
 addCardForm.addEventListener("submit", handleAddCardFormSubmit);
 addNewCardButton.addEventListener("click", () => openPopop(addCardModal));
