@@ -9,9 +9,14 @@
   z-index: 999;
   display: none;
   padding: 0 19px;
+  transition: visibility 0.5s, opacity 0.5s linear;
   }
   
   .modal_opened {
+    visibility: visible;
+    opacity: 1;
+    pointer-events: all;
+    transition: opacity 0.5s linear;
     display: flex;
   }
   
@@ -36,6 +41,7 @@
     background-repeat: no-repeat;
     background-size: contain;
     background-image: url(../images/Close\ Icon.svg);
+    transition: 0.5s;
 
   }
   .modal__close:hover {
@@ -154,16 +160,8 @@
   }
 
   #modal-preview-close-button{
-    border: none;
-    background-color: transparent;
-    position: absolute;
     bottom: calc(100% + 5px);
     left: calc(100% + 5px);
-    width: 40px;
-    height: 40px;   
-    background-repeat: no-repeat;
-    background-size: contain;
-    
   }
   
   @media screen and (max-width: 630px) {
@@ -174,6 +172,11 @@
       left: calc(100% - 24px);
     }
 
+    .modal__image-preview {
+      max-width: 75vw;
+      max-height: 75vh;
+      margin-top: 136px;
+    }
   }
   
   @media screen and (max-width: 500px) {
@@ -185,5 +188,19 @@
       width: 100%;
       padding-bottom: 75px;
     }
-    
+ 
+    .modal__preview-container{
+      display: flex;
+      align-items: flex-start;
+      background-color: transparent;
+    }
+   
+    #modal-preview-close-button{
+      position: absolute;
+      height: 30px;
+      left: calc(100% - 20px);
+      right: -1.63%;
+      top: 100px;
+      bottom: 426px;
+    }
   }
