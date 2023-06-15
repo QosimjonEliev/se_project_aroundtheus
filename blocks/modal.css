@@ -157,10 +157,24 @@
   display: flex;
 }
 
-#modal-preview-close-button {
+.modal__close-button {
+  border: none;
+  background-color: transparent;
+  position: absolute;
   bottom: calc(100% + 5px);
   left: calc(100% + 5px);
+  width: 40px;
+  height: 40px;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-image: url(../images/Close\ Icon.svg);
+  cursor: pointer;
 }
+.modal__close-button:hover{
+opacity: 0.6;
+cursor: pointer;
+}
+
 
 @media screen and (max-width: 630px) {
   .modal__close {
@@ -192,13 +206,12 @@
     align-items: flex-start;
     background-color: transparent;
   }
-
-  #modal-preview-close-button {
+   
+  .modal__close-button{
     position: absolute;
     height: 30px;
-    left: calc(100% - 20px);
+    left: 92.25%;
     right: -1.63%;
     top: 100px;
-    bottom: 426px;
   }
 }
