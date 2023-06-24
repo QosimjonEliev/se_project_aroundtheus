@@ -174,8 +174,8 @@ cursor: pointer;
   top: 35px;
   transition: opacity 0.3s;
 }
-
-.modal__button_disabled{
+.odal__button_disabled{
+  -webkit-box-sizing: border-box;
   box-sizing: border-box;
   background: #fff;
   opacity: 0.2;

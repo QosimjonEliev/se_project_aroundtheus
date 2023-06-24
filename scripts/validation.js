@@ -15,29 +15,30 @@ function hideIputeError(formEl, inputEl, { inputErrorClass, errorClass }) {
 
 function checkInputValidity(formEl, inputEl, content) {
   if (!inputEl.validity.valid) {
-    showInputError(formEl, inputEl, content);
-  } else {
+    return showInputError(formEl, inputEl, content);
+  } 
     hideIputeError(formEl, inputEl, content);
-  }
 }
 
-function toggleButtonState(inputEls, submitButton, {inactiveButtonClass}) {
-  let foundInavalid = false;
 
-  inputEls.forEach(inputEl => {
-    if(!inputEl.validity.valid){
-      foundInavalid = true;
-    }
-  });
+const disableButton = (submitButton, { inactiveButtonClass }) => {
+  submitButton.classList.add(inactiveButtonClass);
+  submitButton.disabled = true;
+};
 
-  if(foundInavalid) {
-    submitButton.classList.add(inactiveButtonClass);
-    submitButton.disable = true;
-  } else {
-    submitButton.classList.remove(inactiveButtonClass);
-    submitButton.disable = false;
+const enableButton = (submitButtonSelector, { inactiveButtonClass }) => {
+  submitButtonSelector.classList.remove(inactiveButtonClass);
+  submitButtonSelector.disabled = false;
+};
+
+const toggleButtonState = (inputEl, submitButtonSelector, { inactiveButtonClass }) => {
+  if (hasInvalidInput(inputEl)) {
+    disableButton(submitButtonSelector, { inactiveButtonClass });
+    return;
   }
-}
+
+  enableButton(submitButtonSelector, { inactiveButtonClass });
+};
 
 
 
@@ -49,7 +50,7 @@ function setEventListeners(formEl, options) {
   inputEls.forEach((inputEl) => {
     inputEl.addEventListener("input", (e) => {
       checkInputValidity(formEl, inputEl, options);
-      toggleButtonState(inputEls, submitButton);
+      toggleButtonState(inputEls, submitButtonSelector);
     });
   });
 }
