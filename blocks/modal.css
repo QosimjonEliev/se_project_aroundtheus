@@ -162,15 +162,25 @@
 opacity: 0.6;
 cursor: pointer;
 }
+.modal__label{
+  position: relative;
+}
 
 .modal__error{
   font-size: 12px;
   line-height: 15px;
   color: #ff0000;
   position: absolute;
-  top: 150px;
-  left: 36px;
+  top: 35px;
   transition: opacity 0.3s;
+}
+
+.modal__button_disabled{
+  box-sizing: border-box;
+  background: #fff;
+  opacity: 0.2;
+  border: 1px solid #000000;
+  border-radius: 2px;
 }
 
 @media screen and (max-width: 630px) {
