@@ -117,6 +117,9 @@ function closeOverlay(e) {
   if (e.target === addCardCloseButton || e.target === addCardModal) {
     closePopup(addCardModal);
   }
+  if (e.target === imgPreviewCloseButton || e.target === imgPreviewModal){
+    closePopup(imgPreviewModal);
+  }
 }
 
 function escKeyClose(e) {
@@ -126,26 +129,13 @@ function escKeyClose(e) {
   if (e.key === "Escape") {
     closePopup(addCardModal);
   }
-}
-
-document.addEventListener("keydown", escKeyClose);
-document.addEventListener("click", closeOverlay)
-
-
-function closeOverlay(e) {
-  if (e.target === imgPreviewCloseButton || e.target === imgPreviewModal) {
-    closePopup(imgPreviewModal);
-  }
-}
-
-function escKeyClose(e) {
   if (e.key === "Escape") {
     closePopup(imgPreviewModal);
   }
 }
-
 document.addEventListener("keydown", escKeyClose);
 document.addEventListener("click", closeOverlay);
+
 
 /*Event Listners*/
 profileEditButton.addEventListener("click", () => {
