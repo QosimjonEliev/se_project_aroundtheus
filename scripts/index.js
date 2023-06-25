@@ -95,8 +95,8 @@ function getCardElement(cardData) {
   cardImageEl.addEventListener("click", () => {
     imagePreview.src = cardData.link;
     imagePreview.alt = cardData.name;
-    imgPreviewTitle.textContent = cardData.name;
-    openPopup(document.querySelector("#preview-image-modal"));
+    imgPreviewTitle.textContent = cardData.name;    
+    openPopup(imgPreviewModal);
   });
 
   return cardElement;
@@ -110,7 +110,8 @@ function handleProfileEditSubmit(e) {
   closePopup(profileEditModal);
 }
 
-function closeOverlay(e) {
+
+function handleModalClose(e) {
   if (e.target === profileEditCloseButton || e.target === profileEditModal) {
     closePopup(profileEditModal);
   }
@@ -122,7 +123,7 @@ function closeOverlay(e) {
   }
 }
 
-function escKeyClose(e) {
+function handleEscape(e) {
   if (e.key === "Escape") {
     closePopup(profileEditModal);
   }
@@ -133,9 +134,8 @@ function escKeyClose(e) {
     closePopup(imgPreviewModal);
   }
 }
-document.addEventListener("keydown", escKeyClose);
-document.addEventListener("click", closeOverlay);
-
+document.addEventListener('keydown', handleEscape);
+document.addEventListener("click", handleModalClose);
 
 /*Event Listners*/
 profileEditButton.addEventListener("click", () => {
@@ -155,13 +155,6 @@ function handleAddCardFormSubmit(evt) {
 
 profileEditForm.addEventListener("submit", handleProfileEditSubmit);
 profileEditButton.addEventListener("click", () => openPopup(profileEditModal));
-profileEditCloseButton.addEventListener("click", () =>
-  closePopup(profileEditModal)
-);
-
-imgPreviewCloseButton.addEventListener("click", () =>{
-  closePopup(imgPreviewModal);
-});
 
 //add new card button
 addCardForm.addEventListener("submit", handleAddCardFormSubmit);
@@ -169,7 +162,6 @@ addNewCardButton.addEventListener("click", () => {
   toggleButtonState([addCardTitleInput, addCardUrlInput], cardFormSubmitButton, config);
   openPopup(addCardModal)}
 );
-addCardCloseButton.addEventListener("click", () => closePopup(addCardModal));
 initialCards.forEach((cardData) => {
   const cardElement = getCardElement(cardData);
   cardsWrap.prepend(cardElement);
