@@ -26,21 +26,19 @@ const disableButton = (submitButton, { inactiveButtonClass }) => {
   submitButton.disabled = true;
 };
 
-const enableButton = (submitButtonSelector, { inactiveButtonClass }) => {
-  submitButtonSelector.classList.remove(inactiveButtonClass);
-  submitButtonSelector.disabled = false;
+const enableButton = (submitButton, { inactiveButtonClass }) => {
+  submitButton.classList.remove(inactiveButtonClass);
+  submitButton.disabled = false;
 };
 
-const toggleButtonState = (inputEl, submitButtonSelector, { inactiveButtonClass }) => {
+const toggleButtonState = (inputEl, submitButton, { inactiveButtonClass }) => {
   if (hasInvalidInput(inputEl)) {
-    disableButton(submitButtonSelector, { inactiveButtonClass });
+    disableButton(submitButton, { inactiveButtonClass });
     return;
   }
 
-  enableButton(submitButtonSelector, { inactiveButtonClass });
+  enableButton(submitButton, { inactiveButtonClass });
 };
-
-
 
 function setEventListeners(formEl, options) {
   const { inputSelector } = options;
@@ -50,7 +48,7 @@ function setEventListeners(formEl, options) {
   inputEls.forEach((inputEl) => {
     inputEl.addEventListener("input", (e) => {
       checkInputValidity(formEl, inputEl, options);
-      toggleButtonState(inputEls, submitButtonSelector);
+      toggleButtonState(inputEls, submitButton, config);
     });
   });
 }

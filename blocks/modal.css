@@ -165,7 +165,6 @@ cursor: pointer;
 .modal__label{
   position: relative;
 }
-
 .modal__error{
   font-size: 12px;
   line-height: 15px;
@@ -174,13 +173,11 @@ cursor: pointer;
   top: 35px;
   transition: opacity 0.3s;
 }
-.odal__button_disabled{
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
-  background: #fff;
+.modal__button_disabled {
   opacity: 0.2;
+  background-color: #ffffff;
+  color: #000000;
   border: 1px solid #000000;
-  border-radius: 2px;
 }
 
 @media screen and (max-width: 630px) {
