@@ -47,6 +47,7 @@ const addCardForm = document.querySelector("#modal_add-card-form");
 const addCardCloseButton = addCardModal.querySelector(
   "#modal-card-close-button"
 );
+const cardFormSubmitButton = document.querySelector("#modal__button-add")
 const addCardTitleInput = document.querySelector("#add-card-title-input");
 const addCardUrlInput = document.querySelector("#add-card-link-input");
 //preview Image
@@ -137,7 +138,10 @@ imgPreviewCloseButton.addEventListener("click", () =>{
 
 //add new card button
 addCardForm.addEventListener("submit", handleAddCardFormSubmit);
-addNewCardButton.addEventListener("click", () => openPopup(addCardModal));
+addNewCardButton.addEventListener("click", () => {
+  toggleButtonState([addCardTitleInput, addCardUrlInput], cardFormSubmitButton, config);
+  openPopup(addCardModal)}
+);
 addCardCloseButton.addEventListener("click", () => closePopup(addCardModal));
 initialCards.forEach((cardData) => {
   const cardElement = getCardElement(cardData);
