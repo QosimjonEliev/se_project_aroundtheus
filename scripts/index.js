@@ -111,31 +111,37 @@ function handleProfileEditSubmit(e) {
 }
 
 
-function handleModalClose(e) {
-  if (e.target === profileEditCloseButton || e.target === profileEditModal) {
-    closePopup(profileEditModal);
-  }
-  if (e.target === addCardCloseButton || e.target === addCardModal) {
-    closePopup(addCardModal);
-  }
-  if (e.target === imgPreviewCloseButton || e.target === imgPreviewModal){
-    closePopup(imgPreviewModal);
+/* Close by click & Escape button*/ 
+function closePopup(modal) {
+  modal.classList.remove("modal_opened");
+  document.removeEventListener("keydown", handleEscape);
+  document.removeEventListener("mousedown", (evt) => {
+    handleEscape(evt, modal);
+  });
+}
+function openPopup(modal) {
+  modal.classList.add("modal_opened");
+  document.addEventListener("keydown", handleEscape);
+  document.addEventListener("mousedown", (evt) => {
+    handleModalClose(evt, modal);
+  });
+}
+
+function handleEscape(evt) {
+  if (evt.key === "Escape") {
+    const openedPopup = document.querySelector(".modal_opened");
+    closePopup(openedPopup);
   }
 }
 
-function handleEscape(e) {
-  if (e.key === "Escape") {
-    closePopup(profileEditModal);
-  }
-  if (e.key === "Escape") {
-    closePopup(addCardModal);
-  }
-  if (e.key === "Escape") {
-    closePopup(imgPreviewModal);
+function handleModalClose(evt, modal) {
+  if (
+    evt.target.classList.contains("modal__close") ||
+    evt.target.classList.contains("modal_opened")
+  ) {
+    closePopup(modal);
   }
 }
-document.addEventListener('keydown', handleEscape);
-document.addEventListener("click", handleModalClose);
 
 /*Event Listners*/
 profileEditButton.addEventListener("click", () => {
