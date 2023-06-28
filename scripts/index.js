@@ -135,7 +135,7 @@ function handleModalClose(evt, modal) {
 profileEditButton.addEventListener("click", () => {
   profileTitleInput.value = profileTitle.textContent;
   profileDescriptionInput.value = profileDescription.textContent;
-  openPopup(profileEditButton);
+  openPopup(profileEditModal);
 });
 
 function handleAddCardFormSubmit(evt) {
