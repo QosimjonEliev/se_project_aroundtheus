@@ -107,15 +107,12 @@ function handleProfileEditSubmit(e) {
 function closePopup(modal) {
   modal.classList.remove("modal_opened");
   document.removeEventListener("keydown", handleEscape);
-  document.removeEventListener("mousedown", (evt) => {
-  });
+  modal.removeEventListener("mousedown", handleModalClose);
 }
 function openPopup(modal) {
   modal.classList.add("modal_opened");
   document.addEventListener("keydown", handleEscape);
-  document.addEventListener("mousedown", (evt) => {
-    handleModalClose(evt, modal);
-  });
+  modal.addEventListener("mousedown", handleModalClose);
 }
 
 function handleEscape(evt) {
@@ -130,7 +127,7 @@ function handleModalClose(evt, modal) {
     evt.target.classList.contains("modal__close") ||
     evt.target.classList.contains("modal_opened")
   ) {
-    closePopup(modal);
+    closePopup(evt.currentTarget);
   }
 }
 
