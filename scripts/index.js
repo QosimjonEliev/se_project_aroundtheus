@@ -62,14 +62,6 @@ const cardsWrap = document.querySelector(".cards__list");
 const cardTemplate =
   document.querySelector("#card-template").content.firstElementChild;
 /*Functions*/
-function closePopup(modal) {
-  modal.classList.remove("modal_opened");
-}
-
-function openPopup(modal) {
-  modal.classList.add("modal_opened");
-}
-
 function renderCard(cardData) {
   const cardElement = getCardElement(cardData);
   cardsWrap.prepend(cardElement);
@@ -116,7 +108,6 @@ function closePopup(modal) {
   modal.classList.remove("modal_opened");
   document.removeEventListener("keydown", handleEscape);
   document.removeEventListener("mousedown", (evt) => {
-    handleEscape(evt, modal);
   });
 }
 function openPopup(modal) {
