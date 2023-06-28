@@ -64,7 +64,7 @@ function enableValidation(options) {
       e.preventDefault();
     });
 
-    setEventListeners(formEl, options);
+  setEventListeners(formEl, options.submitButtonSelector, options);
   });
 }
 
