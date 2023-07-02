@@ -9,14 +9,14 @@ export default class FormValidator {
         this._formElement = formElement;
     }
     _hasInvalidInput() {
-        return !this.inputeEls.every((inputeEl) => inputeEl.validity.valid);
+        return !this._inputEls.every((inputEl) => inputEl.validity.valid);
     }
 
-    _checkInputValidity(inputeEl) {
-        if(!inputeEl.validity.valid) {
-            return this._showInputError(inputeEl);
+    _checkInputValidity(inputEl) {
+        if(!inputEl.validity.valid) {
+            return this._showInputError(inputEl);
         }
-        this._hideInputeError(inputeEl);
+        this._hideInputeError(inputEl);
     }
 
     _showInputError(inputEl) {
@@ -70,6 +70,6 @@ export default class FormValidator {
           this.toggleButtonState();
         });
     
-        this._setEventListeners(this._formElement);
+        this._setEventListeners();
       }
 }
