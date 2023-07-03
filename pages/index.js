@@ -1,5 +1,10 @@
 import Card from "../components/Card.js";
-const card = new Card();
+
+function getCardElement(data) {
+  const card = new Card(data, "#card-template");
+  const cardElement = card.getView();
+  return cardElement;
+}
 
 import  {
   openPopup,
@@ -94,7 +99,6 @@ function renderCard(cardData) {
   const cardElement = getCardElement(cardData);
   cardsWrap.prepend(cardElement);
 }
-
 function getCardElement(cardData) {
   const cardElement = cardTemplate.cloneNode(true);
   const cardTitleEl = cardElement.querySelector(".card__title");
