@@ -1,5 +1,5 @@
 import Card from "../components/Card.js";
-
+const card = new Card();
 
 import  {
   openPopup,

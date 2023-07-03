@@ -1,8 +1,9 @@
    class Card {
-    constructor({name, link }, cardSelector) {
-        this.name = name;
-        this.link = link;
+    constructor(data, cardSelector) {
+        this.name = data.name;
+        this.link = data.link;
         this._cardSelector = cardSelector;
+        this._cardData = data;
     }
 
     _setEventListner() {
