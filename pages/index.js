@@ -1,5 +1,6 @@
 import Card from "../components/Card.js";
 
+
 import  {
   openPopup,
   closePopup,
@@ -16,9 +17,14 @@ const config = {
   errorClass: "modal__error_visible",
 };
 
-const addCardFormEl = document.querySelector("#add-card-modal");4
+const addCardFormEl = document.querySelector("#add-card-modal");
 const addCardValidator = new FormValidator(config, addCardFormEl);
 addCardValidator.enableValidation();
+
+
+const profileEditCardFormEl = document.querySelector("#profile-edit-modal");
+const addProfileCardValidator = new FormValidator(config, profileEditCardFormEl);
+addProfileCardValidator.enableValidation();
 
 const initialCards = [
   {
@@ -148,6 +154,7 @@ addCardForm.addEventListener("submit", handleAddCardFormSubmit);
 addNewCardButton.addEventListener("click", () => {
   //toggleButtonState([addCardTitleInput, addCardUrlInput], cardFormSubmitButton, config);
   addCardValidator.toggleButtonState();
+  addProfileCardValidator.toggleButtonState();
   openPopup(addCardModal)}
 );
 initialCards.forEach((cardData) => {

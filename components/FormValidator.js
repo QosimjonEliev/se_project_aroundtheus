@@ -16,12 +16,12 @@ export default class FormValidator {
         if(!inputEl.validity.valid) {
             return this._showInputError(inputEl);
         }
-        this._hideInputeError(inputEl);
+        this._hideInputError(inputEl);
     }
 
     _showInputError(inputEl) {
         const errorMessageEl = this._formElement.querySelector(
-          "#${inputEl.id}-error"
+          `#${inputEl.id}-error`
         );
         inputEl.classList.add(this._inputErrorClass);
         errorMessageEl.textContent = inputEl.validationMessage;
@@ -30,7 +30,7 @@ export default class FormValidator {
     
       _hideInputError(inputEl) {
         const errorMessageEl = this._formElement.querySelector(
-          "#${inputEl.id}-error"
+          `#${inputEl.id}-error`
         );
         inputEl.classList.remove(this._inputErrorClass);
         errorMessageEl.textContent = "";
