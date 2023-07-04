@@ -99,7 +99,8 @@ function renderCard(cardData) {
   const cardElement = getCardElement(cardData);
   cardsWrap.prepend(cardElement);
 }
-function getCardElement(cardData) {
+
+
   const cardElement = cardTemplate.cloneNode(true);
   const cardTitleEl = cardElement.querySelector(".card__title");
   const cardImageEl = cardElement.querySelector(".card__image");
@@ -121,10 +122,12 @@ function getCardElement(cardData) {
     imagePreview.alt = cardData.name;
     imgPreviewTitle.textContent = cardData.name;    
     openPopup(imgPreviewModal);
+
+    return cardElement;
   });
 
-  return cardElement;
-}
+
+
 
 /*Event Handlers*/
 function handleProfileEditSubmit(e) {
