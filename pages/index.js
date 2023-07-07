@@ -1,35 +1,6 @@
+
 import Card from "../components/Card.js";
 
-function getCardElement(data) {
-  const card = new Card(data, "#card-template");
-  const cardElement = card.getView();
-  return cardElement;
-}
-
-import  {
-  openPopup,
-  closePopup,
-} from  "../utils/utils.js";
-
-import FormValidator from "../components/FormValidator.js";
-
-const config = {
-  formSelector: ".modal__form",
-  inputSelector: ".modal__name",
-  submitButtonSelector: ".modal__button",
-  inactiveButtonClass: "modal__button_disabled",
-  inputErrorClass: "modal__input_type_error",
-  errorClass: "modal__error_visible",
-};
-
-const addCardFormEl = document.querySelector("#add-card-modal");
-const addCardValidator = new FormValidator(config, addCardFormEl);
-addCardValidator.enableValidation();
-
-
-const profileEditCardFormEl = document.querySelector("#profile-edit-modal");
-const addProfileCardValidator = new FormValidator(config, profileEditCardFormEl);
-addProfileCardValidator.enableValidation();
 
 const initialCards = [
   {
@@ -57,6 +28,8 @@ const initialCards = [
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lago.jpg ",
   },
 ];
+
+const card = new Card(initialCards, "#card-template");
 
 console.log(initialCards);
 
@@ -100,7 +73,7 @@ function renderCard(cardData) {
   cardsWrap.prepend(cardElement);
 }
 
-
+function getCardElement(cardData) {
   const cardElement = cardTemplate.cloneNode(true);
   const cardTitleEl = cardElement.querySelector(".card__title");
   const cardImageEl = cardElement.querySelector(".card__image");
@@ -122,12 +95,10 @@ function renderCard(cardData) {
     imagePreview.alt = cardData.name;
     imgPreviewTitle.textContent = cardData.name;    
     openPopup(imgPreviewModal);
-
-    return cardElement;
   });
 
-
-
+  return cardElement;
+}
 
 /*Event Handlers*/
 function handleProfileEditSubmit(e) {
@@ -135,6 +106,35 @@ function handleProfileEditSubmit(e) {
   profileTitle.textContent = profileTitleInput.value;
   profileDescription.textContent = profileDescriptionInput.value;
   closePopup(profileEditModal);
+}
+
+
+/* Close by click & Escape button*/ 
+function closePopup(modal) {
+  modal.classList.remove("modal_opened");
+  document.removeEventListener("keydown", handleEscape);
+  modal.removeEventListener("mousedown", handleModalClose);
+}
+function openPopup(modal) {
+  modal.classList.add("modal_opened");
+  document.addEventListener("keydown", handleEscape);
+  modal.addEventListener("mousedown", handleModalClose);
+}
+
+function handleEscape(evt) {
+  if (evt.key === "Escape") {
+    const openedPopup = document.querySelector(".modal_opened");
+    closePopup(openedPopup);
+  }
+}
+
+function handleModalClose(evt, modal) {
+  if (
+    evt.target.classList.contains("modal__close") ||
+    evt.target.classList.contains("modal_opened")
+  ) {
+    closePopup(evt.currentTarget);
+  }
 }
 
 /*Event Listners*/
@@ -159,9 +159,7 @@ profileEditButton.addEventListener("click", () => openPopup(profileEditModal));
 //add new card button
 addCardForm.addEventListener("submit", handleAddCardFormSubmit);
 addNewCardButton.addEventListener("click", () => {
-  //toggleButtonState([addCardTitleInput, addCardUrlInput], cardFormSubmitButton, config);
-  addCardValidator.toggleButtonState();
-  addProfileCardValidator.toggleButtonState();
+  toggleButtonState([addCardTitleInput, addCardUrlInput], cardFormSubmitButton, config);
   openPopup(addCardModal)}
 );
 initialCards.forEach((cardData) => {
