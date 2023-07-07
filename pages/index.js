@@ -186,7 +186,7 @@ profileEditButton.addEventListener("click", () => openPopup(profileEditModal));
 //add new card button
 addCardForm.addEventListener("submit", handleAddCardFormSubmit);
 addNewCardButton.addEventListener("click", () => {
-  toggleButtonState([addCardTitleInput, addCardUrlInput], cardFormSubmitButton, config);
+  //toggleButtonState([addCardTitleInput, addCardUrlInput], cardFormSubmitButton, config);
   openPopup(addCardModal)}
 );
 initialCards.forEach((cardData) => {
