@@ -1,5 +1,5 @@
 export default class Card { 
-    constructor({name, link, cardSelector}){
+    constructor({name, link}, cardSelector){
         this._name = name;
         this._link = link;
         this._cardSelector = cardSelector;
@@ -29,7 +29,6 @@ export default class Card {
 
     getView() {
      this._cardElement = document.querySelector(this._cardSelector).content.querySelector(`.card`).cloneNode(true);
-     
      this._setEventListeners();
 
 

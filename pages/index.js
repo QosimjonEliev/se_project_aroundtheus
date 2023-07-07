@@ -2,6 +2,33 @@
 import Card from "../components/Card.js";
 
 
+import  {
+  openPopup,
+  closePopup,
+} from  "../utils/utils.js";
+
+import FormValidator from "../components/FormValidator.js";
+
+const config = {
+  formSelector: ".modal__form",
+  inputSelector: ".modal__name",
+  submitButtonSelector: ".modal__button",
+  inactiveButtonClass: "modal__button_disabled",
+  inputErrorClass: "modal__input_type_error",
+  errorClass: "modal__error_visible",
+};
+
+const addCardFormEl = document.querySelector("#add-card-modal");
+const addCardValidator = new FormValidator(config, addCardFormEl);
+addCardValidator.enableValidation();
+
+
+const profileEditCardFormEl = document.querySelector("#profile-edit-modal");
+const addProfileCardValidator = new FormValidator(config, profileEditCardFormEl);
+addProfileCardValidator.enableValidation();
+
+
+
 const initialCards = [
   {
     name: "Yosemite Valley",
@@ -109,7 +136,7 @@ function handleProfileEditSubmit(e) {
 }
 
 
-/* Close by click & Escape button*/ 
+/* Close by click & Escape button 
 function closePopup(modal) {
   modal.classList.remove("modal_opened");
   document.removeEventListener("keydown", handleEscape);
@@ -135,7 +162,7 @@ function handleModalClose(evt, modal) {
   ) {
     closePopup(evt.currentTarget);
   }
-}
+}*/
 
 /*Event Listners*/
 profileEditButton.addEventListener("click", () => {
