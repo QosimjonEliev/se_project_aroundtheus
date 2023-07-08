@@ -7,7 +7,7 @@ import  {
   closePopup,
 } from  "../utils/utils.js";
 
-import FormValidator from "../components/FormValidator.js";
+import FormValidator  from "../components/FormValidator.js";
 
 const config = {
   formSelector: ".modal__form",
@@ -55,10 +55,15 @@ const initialCards = [
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lago.jpg ",
   },
 ];
-
-const card = new Card(initialCards, "#card-template");
-
 console.log(initialCards);
+
+function getCardElement(cardData) {
+  const card = new Card(cardData, "#card-template");
+  const cardElement = card.getView();
+  return cardElement;
+}
+
+
 
 const modals = Array.from(document.querySelectorAll(".modal"));
 const profileEditButton = document.querySelector("#profile-edit-button");
@@ -100,7 +105,7 @@ function renderCard(cardData) {
   cardsWrap.prepend(cardElement);
 }
 
-function getCardElement(cardData) {
+/*function getCardElement(cardData) {
   const cardElement = cardTemplate.cloneNode(true);
   const cardTitleEl = cardElement.querySelector(".card__title");
   const cardImageEl = cardElement.querySelector(".card__image");
@@ -125,7 +130,7 @@ function getCardElement(cardData) {
   });
 
   return cardElement;
-}
+}*/
 
 /*Event Handlers*/
 function handleProfileEditSubmit(e) {
@@ -189,7 +194,7 @@ addNewCardButton.addEventListener("click", () => {
   //toggleButtonState([addCardTitleInput, addCardUrlInput], cardFormSubmitButton, config);
   openPopup(addCardModal)}
 );
-initialCards.forEach((cardData) => {
-  const cardElement = getCardElement(cardData);
-  cardsWrap.prepend(cardElement);
-});
+//initialCards.forEach((cardData) => {
+  //const cardElement = getCardElement(cardData);
+  //cardsWrap.prepend(cardElement);
+//});
