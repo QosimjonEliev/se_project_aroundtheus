@@ -57,10 +57,9 @@ const initialCards = [
 ];
 console.log(initialCards);
 
-function getCardElement(cardData) {
+function createCard(cardData) {
   const card = new Card(cardData, "#card-template");
-  const cardElement = card.getView();
-  return cardElement;
+  return card.getView();
 }
 
 
@@ -101,7 +100,7 @@ const cardTemplate =
   document.querySelector("#card-template").content.firstElementChild;
 /*Functions*/
 function renderCard(cardData) {
-  const cardElement = getCardElement(cardData);
+  const cardElement = createCard(cardData);
   cardsWrap.prepend(cardElement);
 }
 
@@ -180,7 +179,7 @@ function handleAddCardFormSubmit(evt) {
   evt.preventDefault();
   const name = addCardTitleInput.value;
   const link = addCardUrlInput.value;
-  renderCard({ name, link }, cardsWrap);
+  renderCard({ name, link });
   addCardForm.reset();
   closePopup(addCardModal);
 }
@@ -194,7 +193,6 @@ addNewCardButton.addEventListener("click", () => {
   //toggleButtonState([addCardTitleInput, addCardUrlInput], cardFormSubmitButton, config);
   openPopup(addCardModal)}
 );
-//initialCards.forEach((cardData) => {
-  //const cardElement = getCardElement(cardData);
-  //cardsWrap.prepend(cardElement);
-//});
+initialCards.forEach((cardData) => {
+ renderCard(cardData);
+});
