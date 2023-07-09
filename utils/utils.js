@@ -17,7 +17,7 @@ function closePopup(modal) {
     }
   }
   
-  function handleModalClose(evt, modal) {
+  function handleModalClose(evt) {
     if (
       evt.target.classList.contains("modal__close") ||
       evt.target.classList.contains("modal_opened")

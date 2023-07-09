@@ -56,8 +56,6 @@ class Card {
       .content.querySelector(`.card`)
       .cloneNode(true);
     this._setEventListeners();
-    this._cardImageEl = this._cardElement.querySelector(".cards__image");
-    this._cardTitleEl = this._cardElement.querySelector(".cards__title");
     this._cardElement.querySelector(".card__image").src = this._link;
     this._cardElement.querySelector(".card__image").alt = this._name;
     this._cardElement.querySelector(".card__title").textContent = this._name;
