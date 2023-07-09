@@ -88,13 +88,11 @@ const addCardUrlInput = document.querySelector("#add-card-link-input");
 //preview Image
 export const imgPreviewModal = document.querySelector("#preview-image-modal");
 export const imagePreview = imgPreviewModal.querySelector(".modal__image-preview");
+export const imgPreviewTitle = document.querySelector(".modal__image-title");
 const imgPreviewCloseButton = imgPreviewModal.querySelector(
   "#modal-preview-close-button"
 );
-export const previewDescriptionModal =
-imgPreviewModal.querySelector(".modal__label");
-
-const imgPreviewTitle = document.querySelector(".modal__image-title");
+const previewDescriptionModal = imgPreviewModal.querySelector(".modal__label");
 const cardsWrap = document.querySelector(".cards__list");
 const cardTemplate =
   document.querySelector("#card-template").content.firstElementChild;

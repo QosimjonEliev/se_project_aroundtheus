@@ -2,7 +2,7 @@ import { openPopup } from "../utils/utils.js";
 
 import {
   imagePreview,
-  previewDescriptionModal,
+  imgPreviewTitle,
   imgPreviewModal,
 } from "../pages/index.js";
 
@@ -16,7 +16,7 @@ class Card {
   _handleCardImage = (e) => {
     imagePreview.src = this._link;
     imagePreview.alt = this._name;
-    previewDescriptionModal.textContent = this._name;
+    imgPreviewTitle.textContent = this._name;
 
     openPopup(imgPreviewModal);
   };
