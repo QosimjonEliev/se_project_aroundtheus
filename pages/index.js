@@ -62,8 +62,6 @@ function createCard(cardData) {
   return card.getView();
 }
 
-
-
 const modals = Array.from(document.querySelectorAll(".modal"));
 const profileEditButton = document.querySelector("#profile-edit-button");
 const profileEditModal = document.querySelector("#profile-edit-modal");
@@ -88,13 +86,15 @@ const cardFormSubmitButton = document.querySelector("#modal__button-add")
 const addCardTitleInput = document.querySelector("#add-card-title-input");
 const addCardUrlInput = document.querySelector("#add-card-link-input");
 //preview Image
-const imgPreviewModal = document.querySelector("#preview-image-modal");
-const imagePreview = imgPreviewModal.querySelector(".modal__image-preview");
+export const imgPreviewModal = document.querySelector("#preview-image-modal");
+export const imagePreview = imgPreviewModal.querySelector(".modal__image-preview");
 const imgPreviewCloseButton = imgPreviewModal.querySelector(
   "#modal-preview-close-button"
 );
-const imgPreviewTitle = document.querySelector(".modal__image-title");
+export const previewDescriptionModal =
+imgPreviewModal.querySelector(".modal__label");
 
+const imgPreviewTitle = document.querySelector(".modal__image-title");
 const cardsWrap = document.querySelector(".cards__list");
 const cardTemplate =
   document.querySelector("#card-template").content.firstElementChild;

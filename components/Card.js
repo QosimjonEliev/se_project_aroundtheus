@@ -1,4 +1,12 @@
-  class Card {
+import { openPopup } from "../utils/utils.js";
+
+import {
+  imagePreview,
+  previewDescriptionModal,
+  imgPreviewModal,
+} from "../pages/index.js";
+
+class Card {
   constructor({ name, link }, cardSelector) {
     this._name = name;
     this._link = link;
@@ -6,10 +14,11 @@
   }
 
   _handleCardImage = (e) => {
-    imgPreviewModal.src = this._link;
-    imgPreviewModal.alt = this._name;
+    imagePreview.src = this._link;
+    imagePreview.alt = this._name;
     previewDescriptionModal.textContent = this._name;
-    openModal(previewModal);
+
+    openPopup(imgPreviewModal);
   };
 
   _handleDeleteCard() {
@@ -20,10 +29,14 @@
   _handleLikeButton() {
     this._cardElement
       .querySelector(`.card__like-button`)
-      .classList.toggle(`.card__like-button_active`);
+      .classList.toggle(`card__like-button_active`);
   }
 
   _setEventListeners() {
+    this._cardElement
+      .querySelector(".card__image")
+      .addEventListener("click", () => this._handleCardImage());
+
     this._cardElement
       .querySelector(`.card__like-button`)
       .addEventListener(`click`, () => {
