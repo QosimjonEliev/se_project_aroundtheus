@@ -24,8 +24,8 @@ addCardValidator.enableValidation();
 
 
 const profileEditCardFormEl = document.querySelector("#profile-edit-modal");
-const addProfileCardValidator = new FormValidator(config, profileEditCardFormEl);
-addProfileCardValidator.enableValidation();
+const addProfileValidator = new FormValidator(config, profileEditCardFormEl);
+addProfileValidator.enableValidation();
 
 
 
@@ -170,7 +170,7 @@ function handleModalClose(evt, modal) {
 profileEditButton.addEventListener("click", () => {
   profileTitleInput.value = profileTitle.textContent;
   profileDescriptionInput.value = profileDescription.textContent;
-  addProfileCardValidator.toggleButtonState();
+  addProfileValidator.toggleButtonState();
   openPopup(profileEditModal);
 });
 
@@ -179,8 +179,9 @@ function handleAddCardFormSubmit(evt) {
   const name = addCardTitleInput.value;
   const link = addCardUrlInput.value;
   renderCard({ name, link });
-  addCardForm.reset();
   closePopup(addCardModal);
+  addCardForm.reset();
+  addCardValidator.toggleButtonState();
 }
 
 profileEditForm.addEventListener("submit", handleProfileEditSubmit);
