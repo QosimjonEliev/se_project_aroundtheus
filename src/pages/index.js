@@ -7,6 +7,10 @@ import  {
 import FormValidator  from "../components/FormValidator.js";
 import "../pages/index.css";
 import PopupWithForm from "../scripts/PopupWithForm.js";
+import PopupWithImage from "../scripts/PopupWithImage.js";
+import Section from "../scripts/Section.js"
+import UserInfo from "../scripts/UserInfo.js";
+
 
 const config = {
   formSelector: ".modal__form",
@@ -27,6 +31,13 @@ const addProfileValidator = new FormValidator(config, profileEditCardFormEl);
 addProfileValidator.enableValidation();
 
 
+const previewImagePopup = new PopupWithImage (`#preview-image-modal`);
+previewImagePopup.setEventListeners();
+
+const userInfo = new UserInfo({
+  userNameEl: ".profile__name",
+  userdescriptionEl: ".profile__description",
+});
 
 const initialCards = [
   {
@@ -60,6 +71,8 @@ function createCard(cardData) {
   const card = new Card(cardData, "#card-template");
   return card.getView();
 }
+
+
 
 const modals = Array.from(document.querySelectorAll(".modal"));
 const profileEditButton = document.querySelector("#profile-edit-button");
@@ -144,6 +157,16 @@ const profileEditPopup = new PopupWithForm(
 );
 const addCardPopup = new PopupWithForm("#add-card-modal", handleAddCardFormSubmit);
 //const previewImagePopup = new PopupWithImage("#preview-image-modal");
+
+
+const cardSection = new Section(
+  {
+    items: initialCards,renderer: (data) => {
+      const newCard = renderCard(data);
+      cardSection.additem(newCard);
+    }
+  }
+);
 
 /* Close by click & Escape button 
 function closePopup(modal) {
