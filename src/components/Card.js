@@ -1,9 +1,8 @@
-
 import {
   imagePreview,
   imgPreviewTitle,
   imgPreviewModal,
-} from "../pages/index.js";
+} from "../components/pages/index.js";
 
 class Card {
   constructor({ name, link }, cardSelector) {
