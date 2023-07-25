@@ -11,12 +11,13 @@ class Card {
     this._cardSelector = cardSelector;
   }
 
+
   _handleCardImage = (e) => {
     imagePreview.src = this._link;
     imagePreview.alt = this._name;
     imgPreviewTitle.textContent = this._name;
 
-    openPopup(imgPreviewModal);
+
   };
 
   _handleDeleteCard() {
@@ -47,12 +48,17 @@ class Card {
         this._handleDeleteCard();
       });
   }
+  _getTemplate() {
+    this._cardElement = document
+    .querySelector(this._cardSelector)
+    .content.querySelector(`.card`)
+    .cloneNode(true);
+    return this._cardElement;
+  }
+
 
   getView() {
-    this._cardElement = document
-      .querySelector(this._cardSelector)
-      .content.querySelector(`.card`)
-      .cloneNode(true);
+    this._cardElement = this._getTemplate();
     this._setEventListeners();
     this._cardElement.querySelector(".card__image").src = this._link;
     this._cardElement.querySelector(".card__image").alt = this._name;
