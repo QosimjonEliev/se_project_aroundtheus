@@ -2,7 +2,7 @@ import {
   imagePreview,
   imgPreviewTitle,
   imgPreviewModal,
-} from "../components/pages/index.js";
+} from "../pages/index.js";
 
 class Card {
   constructor({ name, link }, cardSelector) {
