@@ -1,9 +1,9 @@
 
 import Card from "../components/Card.js";
-import  {
+/*import  {
   openPopup,
   closePopup,
-} from  "../utils/utils.js";
+} from  "../utils/utils.js";*/
 import FormValidator  from "../components/FormValidator.js";
 import "../pages/index.css";
 import PopupWithForm from "../scripts/PopupWithForm.js";

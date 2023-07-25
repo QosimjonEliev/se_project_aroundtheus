@@ -1,4 +1,3 @@
-import { openPopup } from "../utils/utils.js";
 
 import {
   imagePreview,
