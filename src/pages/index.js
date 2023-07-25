@@ -196,11 +196,12 @@ profileEditButton.addEventListener("click", () => {
   profileTitleInput.value = profileTitle.textContent;
   profileDescriptionInput.value = profileDescription.textContent;
   addProfileValidator.toggleButtonState();
-  openPopup(profileEditModal);
+  //openPopup(profileEditModal);
+  profileEditPopup.open();
 });
 profileEditPopup.setEventListeners();
 addCardPopup.setEventListeners();
-//previewImagePopup.setEventListeners();
+previewImagePopup.setEventListeners();
 
 function handleAddCardFormSubmit(evt) {
   evt.preventDefault();
@@ -213,14 +214,15 @@ function handleAddCardFormSubmit(evt) {
 }
 
 profileEditForm.addEventListener("submit", handleProfileEditSubmit);
-profileEditButton.addEventListener("click", () => openPopup(profileEditModal));
+profileEditButton.addEventListener("click", () => profileEditPopup.open());
 
 //add new card button
 addCardForm.addEventListener("submit", handleAddCardFormSubmit);
 addNewCardButton.addEventListener("click", () => {
   //toggleButtonState([addCardTitleInput, addCardUrlInput], cardFormSubmitButton, config);
-  openPopup(addCardModal)}
-);
+ // openPopup(addCardModal)
+ addCardPopup.open();
+});
 initialCards.forEach((cardData) => {
  renderCard(cardData);
 });
