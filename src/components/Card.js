@@ -5,10 +5,11 @@ import {
 } from "../pages/index.js";
 
 class Card {
-  constructor({ name, link }, cardSelector) {
+  constructor({ name, link }, cardSelector, handleCardImage) {
     this._name = name;
     this._link = link;
     this._cardSelector = cardSelector;
+    this._handleCardImage = handleCardImage;
   }
 
 
@@ -16,8 +17,6 @@ class Card {
     imagePreview.src = this._link;
     imagePreview.alt = this._name;
     imgPreviewTitle.textContent = this._name;
-
-
   };
 
   _handleDeleteCard() {
@@ -32,9 +31,9 @@ class Card {
   }
 
   _setEventListeners() {
-    this._cardElement
-      .querySelector(".card__image")
-      .addEventListener("click", () => this._handleCardImage());
+    this._cardElement.addEventListener("click", () => {
+      this.handleCardImage({name: this._name, link: this._link});
+    });
 
     this._cardElement
       .querySelector(`.card__like-button`)
