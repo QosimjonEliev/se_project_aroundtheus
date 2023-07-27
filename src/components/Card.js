@@ -32,7 +32,7 @@ class Card {
 
   _setEventListeners() {
     this._cardElement.addEventListener("click", () => {
-      this.handleCardImage({name: this._name, link: this._link});
+      this._handleCardImage({name: this._name, link: this._link});
     });
 
     this._cardElement

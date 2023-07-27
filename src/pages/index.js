@@ -63,7 +63,7 @@ const initialCards = [
 console.log(initialCards);
 
 function createCard(cardData) {
-  const card = new Card(cardData, "#card-template");
+  const card = new Card(cardData, "#card-template", handleCardImage);
   return card.getView();
 }
 
@@ -109,7 +109,7 @@ function renderCard(cardData) {
   cardsWrap.prepend(cardElement);
 }
 
-function handleCardImageClick({cardData}) {
+function handleCardImage({cardData}) {
   previewImagePopup.open(cardData);
 }
 /*function getCardElement(cardData) {
