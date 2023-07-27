@@ -5,11 +5,12 @@ import Popup from "./Popup.js";
     super(popupSelector);
   }
 
-  open( name, link ) {
-    const image = this._viewImage = document.querySelector(".modal__image-preview");
-    this._viewImageCaption = document.querySelector(".modal__image-title").textContent = name;
+  open(name, link) {
+    const image = this._popupElement.querySelector(".modal__image-preview");
+    const title = this._popupElement.querySelector(".modal__image-title");
     image.src = link;
-    image.alt = `${name}`;
+    image.alt = name;
+    title.textContent = name;
     super.open();
   }
 

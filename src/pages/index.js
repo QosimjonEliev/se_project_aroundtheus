@@ -109,8 +109,8 @@ function renderCard(cardData) {
   cardsWrap.prepend(cardElement);
 }
 
-function handleCardImage({cardData}) {
-  previewImagePopup.open(cardData);
+function handleCardImage({name, link}) {
+  previewImagePopup.open(name, link);
 }
 /*function getCardElement(cardData) {
   const cardElement = cardTemplate.cloneNode(true);

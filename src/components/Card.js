@@ -13,11 +13,11 @@ class Card {
   }
 
 
-  _handleCardImage = (e) => {
-    imagePreview.src = this._link;
-    imagePreview.alt = this._name;
-    imgPreviewTitle.textContent = this._name;
-  };
+  //_handleCardImage = (e) => {
+    //imagePreview.src = this._link;
+    //imagePreview.alt = this._name;
+    //imgPreviewTitle.textContent = this._name;
+  //};
 
   _handleDeleteCard() {
     this._cardElement.remove();
@@ -31,7 +31,7 @@ class Card {
   }
 
   _setEventListeners() {
-    this._cardElement.addEventListener("click", () => {
+    this._cardElement.querySelector(".card__image").addEventListener("click", () => {
       this._handleCardImage({name: this._name, link: this._link});
     });
 
