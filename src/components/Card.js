@@ -1,9 +1,3 @@
-import {
-  imagePreview,
-  imgPreviewTitle,
-  imgPreviewModal,
-} from "../pages/index.js";
-
 class Card {
   constructor({ name, link }, cardSelector, handleCardImage) {
     this._name = name;

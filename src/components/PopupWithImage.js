@@ -14,9 +14,9 @@ import Popup from "./Popup.js";
     super.open();
   }
 
-  setEventListeners() {
-    super.setEventListeners();
-    this._popupElement.querySelector("click", this._viewImageClick);
-  }
+  //setEventListeners() {
+   // super.setEventListeners();
+   // this._popupElement.querySelector("click", this._viewImageClick);
+  //}
 }
 export default PopupwithImage;
