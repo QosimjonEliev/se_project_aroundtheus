@@ -33,8 +33,8 @@ const previewImagePopup = new PopupWithImage(`#preview-image-modal`);
 previewImagePopup.setEventListeners();
 
 const userInfo = new UserInfo({
-  userNameEl: ".profile__name",
-  userdescriptionEl: ".profile__description",
+  userNameSelector: ".profile__name",
+  userDescriptionSelector: ".profile__description",
 });
 
 function createCard(cardData) {
@@ -78,9 +78,10 @@ function handleCardImage({ name, link }) {
   return cardElement;
 }*/
 
+
 /*Event Handlers*/
-function handleProfileEditSubmit({title, description}) {
-  userInfo.setUserInfo(title, description);
+function handleProfileEditSubmit({userName, userDescription}) {
+  userInfo.setUserInfo(userName, userDescription);
   profileEditPopup.close();
 }
 
