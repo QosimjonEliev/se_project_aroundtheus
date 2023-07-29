@@ -77,11 +77,16 @@ function handleCardImage({ name, link }) {
 
   return cardElement;
 }*/
-
+function handleProfileEditClick () {
+  const info = userInfo.getUserInfo(); 
+  profileTitleInput.value = info.userName;
+  profileDescriptionInput.value = info.userDescription;
+  profileEditPopup.open();
+}
 
 /*Event Handlers*/
-function handleProfileEditSubmit({userName, userDescription}) {
-  userInfo.setUserInfo(userName, userDescription);
+function handleProfileEditSubmit(inputvalues) {
+  userInfo.setUserInfo(profileDescriptionInput.value, profileDescriptionInput.value);
   profileEditPopup.close();
 }
 
