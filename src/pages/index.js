@@ -38,7 +38,7 @@ const userInfo = new UserInfo({
 });
 
 function createCard(cardData) {
-  const card = new Card(cardData, "#card-template", handleCardImage);
+  const card = new Card(cardData, "#card-template",  handleCardImage);
   return card.getView();
 }
 
