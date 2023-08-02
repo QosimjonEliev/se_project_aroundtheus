@@ -137,7 +137,7 @@ function handleModalClose(evt, modal) {
 profileEditButton.addEventListener("click", () => {
   const userData = userInfo.getUserInfo();
   profileTitleInput.value = userData.userName;
-  profileDescription.value = userData.userDescription;
+  profileDescriptionInput.value = userData.userDescription;
   addProfileValidator.toggleButtonState();
   //openPopup(profileEditModal);
   profileEditPopup.open();
@@ -146,11 +146,13 @@ profileEditPopup.setEventListeners();
 addCardPopup.setEventListeners();
 previewImagePopup.setEventListeners();
 
-function handleAddCardFormSubmit(inputValues) {
-  const { name, link } = inputValues;
+function handleAddCardFormSubmit(data) {
+  data.name = addCardTitleInput.value;
+  data.link = addCardUrlInput.value;
+ // const { name, link } = inputValues;
   const newCardData = {
-    name: name,
-    link: link,
+    name: data.name,
+    link: data.link,
   };
   const newCard = createCard(newCardData);
   cardSection.addItem(newCard);
