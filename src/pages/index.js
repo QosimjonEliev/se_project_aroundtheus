@@ -23,7 +23,6 @@ import {
   imgPreviewTitle,
 } from "../utils/constants.js";
 
-
 const addCardFormEl = document.querySelector("#add-card-modal");
 const addCardValidator = new FormValidator(config, addCardFormEl);
 addCardValidator.enableValidation();
@@ -40,8 +39,8 @@ const userInfo = new UserInfo({
   userDescriptionSelector: ".profile__description",
 });
 
-function renderCard (cardData) {
-  const card = new Card(cardData, "#card-template",  handleCardImage);
+function renderCard(cardData) {
+  const card = new Card(cardData, "#card-template", handleCardImage);
   return card.getView();
 }
 function handleCardImage(name, link) {
@@ -78,11 +77,10 @@ const cardSection = new Section(
       const cardElement = renderCard(data);
       cardSection.addItem(cardElement);
     },
-},
-cardsWrap
+  },
+  cardsWrap
 );
 cardSection.renderItems(initialCards);
-
 
 /*Event Listners*/
 profileEditButton.addEventListener("click", () => {
@@ -97,14 +95,13 @@ addCardPopup.setEventListeners();
 previewImagePopup.setEventListeners();
 
 function handleAddCardFormSubmit(inputValues) {
-  const {name, link} = inputValues;
-  renderCard({name, link});
+  const { name, link } = inputValues;
+  const card = renderCard({ name, link });
+  cardSection.addItem(card);
   addCardPopup.close();
 }
 
-
-  addNewCardButton.addEventListener("click", () => {
-    addCardValidator.toggleButtonState();
-    addCardPopup.open();
-  });
-
+addNewCardButton.addEventListener("click", () => {
+  addCardValidator.toggleButtonState();
+  addCardPopup.open();
+});
