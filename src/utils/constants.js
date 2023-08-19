@@ -72,3 +72,5 @@ export const previewDescriptionModal = imgPreviewModal.querySelector(".modal__la
 export const cardsWrap = document.querySelector(".cards__list");
 export const cardTemplate =
   document.querySelector("#card-template").content.firstElementChild;
+export const profileAvatarButton = document.querySelector(".profile__avatar-select");
+export const submitDeleteButton = document.querySelector(".modal__card-delete-button");

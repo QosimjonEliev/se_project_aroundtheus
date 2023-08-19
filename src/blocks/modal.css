@@ -26,8 +26,29 @@
   margin: auto;
   border-radius: 10px;
   width: 430px;
-  height: 330px;
   max-height: 500px;
+}
+
+.modal__container-image {
+  position: relative;
+  padding: 36px;
+  margin: auto;
+  border-radius: 10px;
+  max-height: 500px;
+}
+
+.modal__card-delete-button {
+  margin-top: 0;
+  border-radius: 2px;
+}
+
+.modal__container-delete{
+  background-color: #fff;
+  width: 430px;
+  height: 181px;
+  position: relative;
+  margin: auto;
+  border-radius: 10px;
 }
 
 .modal__close {
@@ -158,14 +179,14 @@
   background-image: url(../images/Close\ Icon.svg);
   cursor: pointer;
 }
-.modal__close-button:hover{
-opacity: 0.6;
-cursor: pointer;
+.modal__close-button:hover {
+  opacity: 0.6;
+  cursor: pointer;
 }
-.modal__label{
+.modal__label {
   position: relative;
 }
-.modal__error{
+.modal__error {
   font-size: 12px;
   line-height: 15px;
   color: #ff0000;
@@ -210,8 +231,8 @@ cursor: pointer;
     align-items: flex-start;
     background-color: transparent;
   }
-   
-  .modal__close-button{
+
+  .modal__close-button {
     position: absolute;
     height: 30px;
     left: 92.25%;

@@ -1,9 +1,13 @@
 class Card {
-  constructor({ name, link }, cardSelector, handleCardImage) {
+  constructor({ name, link, likes, _id }, cardSelector, handleCardImage, handleDelete, ) {
     this._name = name;
     this._link = link;
     this._cardSelector = cardSelector;
     this._handleCardImage = handleCardImage;
+    this._handleDelet = handleDelete;
+    //this._userId = userId;
+    this._cardId = _id;
+    this._likes = likes; 
   }
 
 
