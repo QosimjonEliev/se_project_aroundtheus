@@ -32,13 +32,13 @@ export default class Api {
         });
       }
 
-      editProfileInformation({ name, about }) {
+      editProfileInformation({ name, description }) {
         return this._request(`${this._baseUrl}/users/me`, {
           method: "PATCH",
           headers: this._headers,
           body: JSON.stringify({
             name,
-            about,
+            description,
           }),
         })
           .then((response) => {
@@ -49,13 +49,11 @@ export default class Api {
           });
       }
 
-      avatarInformation({avatar}) {
+      avatarInformation({inputValues}) {
         return this._request(`${this._baseUrl})/cards/users/me/avatar`, {
           method: "PATCH",
           headers: this._headers,
-          body: JSON.stringify({
-            avatar,
-          }),
+          body: JSON.stringify({avatar: inputValues}),
         });
       }
     
