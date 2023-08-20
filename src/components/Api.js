@@ -32,29 +32,23 @@ export default class Api {
         });
       }
 
-      editProfileInformation({ name, description }) {
-        return this._request(`${this._baseUrl}/users/me`, {
+      updateProfileInfo(inputValues) {
+        return fetch(`${this._baseUrl}/users/me`, {
           method: "PATCH",
           headers: this._headers,
           body: JSON.stringify({
-            name,
-            description,
+            name: inputValues.name,
+            about: inputValues.about,
           }),
-        })
-          .then((response) => {
-            return response;
-          })
-          .finally(() => {
-            console.log("Done sending User Information");
-          });
+        }).then(this._checkResponse);
       }
 
-      avatarInformation({inputValues}) {
-        return this._request(`${this._baseUrl})/cards/users/me/avatar`, {
+      avatarInformation(inputValues) {
+        return fetch(`${this._baseUrl}/users/me/avatar`, {
           method: "PATCH",
           headers: this._headers,
-          body: JSON.stringify({avatar: inputValues}),
-        });
+          body: JSON.stringify({ avatar: inputValues }),
+        }).then(this._checkResponse);
       }
     
       addNewCardInformation({ name, link }) {

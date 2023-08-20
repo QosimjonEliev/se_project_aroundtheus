@@ -133,32 +133,32 @@ addNewCardButton.addEventListener("click", () => {
 
 
 function handleAvatarImage(inputValues) {
-  avatarFormPopup.renderLoading(true);
+  avatarInformation.renderLoading(true);
   api
     .avatarInformation(inputValues.link)
     .then((res) => {
       userInfo.setUserInfo(res);
     })
     .then(() => {
-      avatarFormPopup.close();
+      avatarInformation.close();
     })
     .catch((err) => {
       console.error(err);
     })
     .finally(() => {
-      avatarFormPopup.renderLoading(false);
+      avatarInformation.renderLoading(false);
     });
 }
 
-const avatarFormPopup = new PopupWithForm(".avatar__modal", handleAvatarImage);
+const avatarInformation = new PopupWithForm(".avatar__modal", handleAvatarImage);
 
 profileAvatarButton.addEventListener("click", () => {
   const userData = userInfo.getUserInfo();
   profileTitleInput.value = userData.userName;
 
-  avatarFormPopup.open();
+  avatarInformation.open();
 });
-avatarFormPopup.setEventListeners();
+avatarInformation.setEventListeners();
 
 const cardDeletePositiv = new PopupWithCardDelete("#card-delet-modal",
 handleDelete);
