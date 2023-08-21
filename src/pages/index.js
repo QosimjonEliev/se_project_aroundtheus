@@ -34,30 +34,28 @@ const api = new Api({
     "Content-Type": "application/json",
   },
 });
-let cardsSection;
+let cardSection;
 let userId; 
 
 Promise.all([api.getUserInfo(), api.getInitialCards()])
 .then(([userData, initialCards]) => {
   userId = userData._id;
-  userInfo.setUserInfo(userData.name, userData,description);
+  userInfo.setUserInfo(userData.name, userData.description);
   userInfo.setAvatarInfo(userData.avatar);
-})
-.catch((err) => {
-  console.log(err);
+
+  cardSection = new Section(
+    {
+      items: initialCards,
+      renderer: (data) => {
+        const cardElement = renderCard(data);
+        cardSection.addItem(cardElement);
+      },
+    },
+    cardsWrap
+  );
+  cardSection.renderItems(initialCards);
 });
 
-const cardSection = new Section(
-  {
-    items: initialCards,
-    renderer: (data) => {
-      const cardElement = renderCard(data);
-      cardSection.addItem(cardElement);
-    },
-  },
-  cardsWrap
-);
-cardSection.renderItems(initialCards);
 
 const addCardFormEl = document.querySelector("#add-card-modal");
 const addCardValidator = new FormValidator(config, addCardFormEl);
@@ -135,7 +133,7 @@ addNewCardButton.addEventListener("click", () => {
 function handleAvatarImage(inputValues) {
   avatarInformation.renderLoading(true);
   api
-    .avatarInformation(inputValues.link)
+    .avatarInformation(inputValues.avatar)
     .then((res) => {
       userInfo.setUserInfo(res);
     })

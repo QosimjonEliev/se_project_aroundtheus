@@ -32,13 +32,13 @@ export default class Api {
         });
       }
 
-      updateProfileInfo(inputValues) {
+      updateProfileInfo(name, description) {
         return fetch(`${this._baseUrl}/users/me`, {
           method: "PATCH",
           headers: this._headers,
           body: JSON.stringify({
-            name: inputValues.name,
-            about: inputValues.about,
+            name,
+            description,
           }),
         }).then(this._checkResponse);
       }
