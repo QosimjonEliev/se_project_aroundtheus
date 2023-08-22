@@ -34,28 +34,30 @@ const api = new Api({
     "Content-Type": "application/json",
   },
 });
-let cardSection;
+let cardsSection;
 let userId; 
 
 Promise.all([api.getUserInfo(), api.getInitialCards()])
 .then(([userData, initialCards]) => {
   userId = userData._id;
-  userInfo.setUserInfo(userData.name, userData.description);
+  userInfo.setUserInfo(userData.name, userData.about);
   userInfo.setAvatarInfo(userData.avatar);
-
-  cardSection = new Section(
-    {
-      items: initialCards,
-      renderer: (data) => {
-        const cardElement = renderCard(data);
-        cardSection.addItem(cardElement);
-      },
-    },
-    cardsWrap
-  );
-  cardSection.renderItems(initialCards);
+})
+.catch((err) => {
+  console.log(err);
 });
 
+const cardSection = new Section(
+  {
+    items: initialCards,
+    renderer: (data) => {
+      const cardElement = renderCard(data);
+      cardSection.addItem(cardElement);
+    },
+  },
+  cardsWrap
+);
+cardSection.renderItems(initialCards);
 
 const addCardFormEl = document.querySelector("#add-card-modal");
 const addCardValidator = new FormValidator(config, addCardFormEl);
