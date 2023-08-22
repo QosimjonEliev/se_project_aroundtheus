@@ -38,7 +38,7 @@ const api = new Api({
 let userId;
 
 Promise.all([api.getUserInfo(), api.getInitialCards()])
-  .then(([userData, initialCards]) => {
+  .then(([userData, ]) => {
     userId = userData._id;
     userInfo.setUserInfo(userData.name, userData.about);
     userInfo.setAvatarInfo(userData.avatar);
@@ -98,8 +98,19 @@ function handleProfileEditClick() {
 
 /*Event Handlers*/
 function handleProfileEditSubmit(inputValues) {
-  userInfo.setUserInfo(inputValues);
-  profileEditPopup.close();
+  profileEditPopup.renderLoading(true)
+  api
+  .updateProfileInfo(inputValues)
+  .then(() => {
+    userInfo.setUserInfo(inputValues);
+    profileEditPopup.close();
+  })
+  .catch((err) => {
+    console.log(err);
+  })
+  .finally(() => {
+    profileEditPopup.renderLoading(false);
+  });
 }
 
 const profileEditPopup = new PopupWithForm(
