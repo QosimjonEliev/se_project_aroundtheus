@@ -5,7 +5,7 @@ export default class UserInfo {
     this._userAvatarElement = document.querySelector(userProfileSelector);
   }
   
-  setUserInfo({ name, about }) {
+  setUserInfo( name, about ) {
     this._nameElement.textContent = name;
     this._descriptionElement.textContent = about;
   }

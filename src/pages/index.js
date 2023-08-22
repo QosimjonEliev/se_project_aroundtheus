@@ -21,7 +21,7 @@ import {
   config,
   imagePreview,
   imgPreviewTitle,
-  profileAvatarButton
+  profileAvatarButton,
 } from "../utils/constants.js";
 
 import PopupWithCardDelete from "../components/PopupWithCardDelete.js";
@@ -34,30 +34,30 @@ const api = new Api({
     "Content-Type": "application/json",
   },
 });
-let cardsSection;
-let userId; 
+//let cardSection;
+let userId;
 
 Promise.all([api.getUserInfo(), api.getInitialCards()])
-.then(([userData, initialCards]) => {
-  userId = userData._id;
-  userInfo.setUserInfo(userData.name, userData.about);
-  userInfo.setAvatarInfo(userData.avatar);
-})
-.catch((err) => {
-  console.log(err);
-});
+  .then(([userData, initialCards]) => {
+    userId = userData._id;
+    userInfo.setUserInfo(userData.name, userData.about);
+    userInfo.setAvatarInfo(userData.avatar);
+  })
+  .catch((err) => {
+    console.log(err);
+  });
 
-const cardSection = new Section(
-  {
-    items: initialCards,
-    renderer: (data) => {
-      const cardElement = renderCard(data);
-      cardSection.addItem(cardElement);
-    },
-  },
-  cardsWrap
-);
-cardSection.renderItems(initialCards);
+    const cardSection = new Section(
+      {
+        items: initialCards,
+        renderer: (data) => {
+          const cardElement = renderCard(data);
+          cardSection.addItem(cardElement);
+        },
+      },
+      cardsWrap
+    );
+    cardSection.renderItems(initialCards);
 
 const addCardFormEl = document.querySelector("#add-card-modal");
 const addCardValidator = new FormValidator(config, addCardFormEl);
@@ -77,7 +77,12 @@ const userInfo = new UserInfo({
 });
 
 function renderCard(cardData) {
-  const card = new Card(cardData, "#card-template", handleCardImage, handleDelete,);
+  const card = new Card(
+    cardData,
+    "#card-template",
+    handleCardImage,
+    handleDelete
+  );
   return card.getView();
 }
 function handleCardImage(name, link) {
@@ -131,7 +136,6 @@ addNewCardButton.addEventListener("click", () => {
   addCardPopup.open();
 });
 
-
 function handleAvatarImage(inputValues) {
   avatarInformation.renderLoading(true);
   api
@@ -150,7 +154,10 @@ function handleAvatarImage(inputValues) {
     });
 }
 
-const avatarInformation = new PopupWithForm(".avatar__modal", handleAvatarImage);
+const avatarInformation = new PopupWithForm(
+  ".avatar__modal",
+  handleAvatarImage
+);
 
 profileAvatarButton.addEventListener("click", () => {
   const userData = userInfo.getUserInfo();
@@ -160,27 +167,29 @@ profileAvatarButton.addEventListener("click", () => {
 });
 avatarInformation.setEventListeners();
 
-const cardDeletePositiv = new PopupWithCardDelete("#card-delet-modal",
-handleDelete);
+const cardDeletePositiv = new PopupWithCardDelete(
+  "#card-delet-modal",
+  handleDelete
+);
 
-function handleDelete (cardId) {
+function handleDelete(cardId) {
   console.log(cardId);
   cardDeletePositiv.setSubmitAction(() => {
     cardDeletePositiv.renderLoading();
     api
-    .deleteCardInformation()
-    .then((res) => {
-      cardId.remove(res._id);
-    })
-    .then(() => {
-      cardDeletePositiv.close();
-    })
-    .catch((err) => {
-      console.error(err);
-    })
-    .finally(() => {
-      cardDeletePositiv.renderLoading(false);
-    });
+      .deleteCardInformation()
+      .then((res) => {
+        cardId.remove(res._id);
+      })
+      .then(() => {
+        cardDeletePositiv.close();
+      })
+      .catch((err) => {
+        console.error(err);
+      })
+      .finally(() => {
+        cardDeletePositiv.renderLoading(false);
+      });
   });
-  cardDeletePositiv.open
+  cardDeletePositiv.open;
 }
