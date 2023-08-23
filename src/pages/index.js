@@ -97,12 +97,12 @@ function handleProfileEditClick() {
 }
 
 /*Event Handlers*/
-function handleProfileEditSubmit(inputValues) {
+function handleProfileEditSubmit(name, about) {
   profileEditPopup.renderLoading(true)
   api
-  .updateProfileInfo(inputValues)
+  .updateProfileInfo(name, about )
   .then(() => {
-    userInfo.setUserInfo(inputValues);
+    userInfo.setUserInfo(name, about);
     profileEditPopup.close();
   })
   .catch((err) => {
