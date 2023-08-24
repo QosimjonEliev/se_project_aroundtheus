@@ -32,19 +32,19 @@ export default class Api {
         });
       }
 
-      updateProfileInfo(inputValues) {
+     updateProfileInfo(name, about) {
         return fetch(`${this._baseUrl}/users/me`, {
           method: "PATCH",
           headers: this._headers,
           body: JSON.stringify({
-            name: inputValues.name,
-            about: inputValues.about,
+            name: name,
+            about: about,
           }),
         }).then(this._checkResponse);
       }
 
       avatarInformation(inputValues) {
-        return fetch(`${this._baseUrl}/users/me/avatar`, {
+        return fetch(`${this._baseUrl}/users/me/avatar/`, {
           method: "PATCH",
           headers: this._headers,
           body: JSON.stringify({ avatar: inputValues }),
@@ -56,8 +56,8 @@ export default class Api {
           method: "POST",
           headers: this._headers,
           body: JSON.stringify({
-            name,
-            link,
+           name: name,
+           link: link,
           }),
         })
           .then((response) => {

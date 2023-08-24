@@ -4,7 +4,7 @@ class Card {
     this._link = link;
     this._cardSelector = cardSelector;
     this._handleCardImage = handleCardImage;
-    this._handleDelet = handleDelete;
+    this._handleDeleteCard = handleDelete;
     this._userId = userId;
     this._cardId = _id;
     this._likes = likes; 

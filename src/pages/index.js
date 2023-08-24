@@ -97,12 +97,12 @@ function handleProfileEditClick() {
 }
 
 /*Event Handlers*/
-function handleProfileEditSubmit(name, about) {
+function handleProfileEditSubmit(inputValues) {
   profileEditPopup.renderLoading(true)
   api
-  .updateProfileInfo(name, about )
+  .updateProfileInfo(inputValues.name, inputValues.about )
   .then(() => {
-    userInfo.setUserInfo(name, about);
+    userInfo.setUserInfo(inputValues.name, inputValues.about);
     profileEditPopup.close();
   })
   .catch((err) => {
@@ -184,7 +184,6 @@ const cardDeletePositiv = new PopupWithCardDelete(
 );
 
 function handleDelete(cardId) {
-  console.log(cardId);
   cardDeletePositiv.setSubmitAction(() => {
     cardDeletePositiv.renderLoading();
     api
