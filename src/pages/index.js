@@ -121,7 +121,7 @@ const profileEditPopup = new PopupWithForm(
 
 const addCardPopup = new PopupWithForm(
   "#add-card-modal",
-  handleAddCardFormSubmit
+  handleAddCardFormSubmit,
 );
 
 /*Event Listners*/
@@ -142,7 +142,7 @@ function handleAddCardFormSubmit(inputValues) {
   cardSection.addItem(card);
   addCardPopup.close();
   api
-  .addNewCardInformation(name, link)
+  .addNewCardInformation(inputValues.name, inputValues.link)
   .then(() => {
     const addCard = renderCard(addCard.getView());
     addCardPopup.close();
@@ -154,6 +154,7 @@ function handleAddCardFormSubmit(inputValues) {
     addCardPopup.renderLoading(false);
   });
 }
+
 
 addNewCardButton.addEventListener("click", () => {
   addCardValidator.toggleButtonState();
@@ -195,21 +196,6 @@ const cardDeletePositiv = new PopupWithCardDelete(
   "#card-delet-modal",
   handleDelete
 );
-
-//function handleAddCard (inputValues) {
- // addCardPopup.renderLoading(true);
-
-//}
-
-
-
-
-
-
-
-
-
-
 
 function handleDelete(cardId) {
     cardDeletePositiv.setSubmitAction(() => {
