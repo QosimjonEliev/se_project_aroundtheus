@@ -11,8 +11,8 @@ export default class Api {
         return Promise.reject(`Error: ${res.status}`);
     }
 
-    _request(url, options) {
-        return fetch(url, options).then(this._checResponse);
+    _request(name, link) {
+        return fetch(name, link).then(this._checResponse);
     }
 
     getUserInfo(){

@@ -78,6 +78,17 @@
   margin: 0;
   padding-bottom: 54px;
 }
+
+.modal__heading-delete {
+  color: #000;
+  font-family: "Inter", Arial, sans-serif;
+  font-style: normal;
+  font-weight: 900;
+  font-size: 24px;
+  line-height: 1.21;
+  margin: 0;
+}
+
 .modal__form {
   display: flex;
   flex-direction: column;

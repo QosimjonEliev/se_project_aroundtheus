@@ -7,7 +7,7 @@ export default class PopupWithCardDelete extends Popup {
     this._popupForm = this._popupElement.querySelector(".modal__form");
     this._submitButton = this._popupForm.querySelector(".modal__button");
     //this._submitButtonText = this._submitButton.textContent;
-    this._deleteCardButton = this._popupElement.querySelector(".modal__card-delete-button");
+    this._deleteCardButton = this._popupElement.querySelector("#modal__card-delete-button");
   }
 
   renderLoading(isLoading, loading = "Saving...") {

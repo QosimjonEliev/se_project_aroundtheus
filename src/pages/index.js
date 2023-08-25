@@ -22,6 +22,7 @@ import {
   imagePreview,
   imgPreviewTitle,
   profileAvatarButton,
+  submitDeleteButton,
 } from "../utils/constants.js";
 
 import PopupWithCardDelete from "../components/PopupWithCardDelete.js";
@@ -140,6 +141,18 @@ function handleAddCardFormSubmit(inputValues) {
   const card = renderCard({ name, link });
   cardSection.addItem(card);
   addCardPopup.close();
+  api
+  .addNewCardInformation(name, link)
+  .then(() => {
+    const addCard = renderCard(addCard.getView());
+    addCardPopup.close();
+  })
+  .catch((err) => {
+    console.log(err);
+  })
+  .finally(() => {
+    addCardPopup.renderLoading(false);
+  });
 }
 
 addNewCardButton.addEventListener("click", () => {
@@ -183,8 +196,23 @@ const cardDeletePositiv = new PopupWithCardDelete(
   handleDelete
 );
 
+//function handleAddCard (inputValues) {
+ // addCardPopup.renderLoading(true);
+
+//}
+
+
+
+
+
+
+
+
+
+
+
 function handleDelete(cardId) {
-  cardDeletePositiv.setSubmitAction(() => {
+    cardDeletePositiv.setSubmitAction(() => {
     cardDeletePositiv.renderLoading();
     api
       .deleteCardInformation()
@@ -201,5 +229,5 @@ function handleDelete(cardId) {
         cardDeletePositiv.renderLoading(false);
       });
   });
-  cardDeletePositiv.open;
+  cardDeletePositiv.open();
 }
