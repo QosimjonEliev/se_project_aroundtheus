@@ -153,22 +153,7 @@ function handleAddCardFormSubmit(inputValues) {
   .catch((err) => {
     console.log(err);
   })
- // addCardPopup.renderLoading(true);
-  //api
-  //.addNewCardInformation(inputValues)
-  //.then(() => {
-    //const  addCard = renderCard(cardData);
-    //cardSection.addItem(addCard.getView());
-    //addCardPopup.close();
-  //})
-  //.catch((err) => {
-   // console.log(err);
-  //})
-  //.finally(() => {
-   // addCardPopup.renderLoading(false);
-  //});
 }
-
 
 addNewCardButton.addEventListener("click", () => {
   addCardValidator.toggleButtonState();
