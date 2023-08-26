@@ -143,16 +143,30 @@ function handleAddCardFormSubmit(inputValues) {
   addCardPopup.close();
   api
   .addNewCardInformation(inputValues.name, inputValues.link)
-  .then(() => {
-    const addCard = renderCard(addCard.getView());
+  .then((res) => {
     addCardPopup.close();
+    renderCard(res);
+  })
+  .finally(() => {
+    addCardPopup.renderLoading(false);
   })
   .catch((err) => {
     console.log(err);
   })
-  .finally(() => {
-    addCardPopup.renderLoading(false);
-  });
+ // addCardPopup.renderLoading(true);
+  //api
+  //.addNewCardInformation(inputValues)
+  //.then(() => {
+    //const  addCard = renderCard(cardData);
+    //cardSection.addItem(addCard.getView());
+    //addCardPopup.close();
+  //})
+  //.catch((err) => {
+   // console.log(err);
+  //})
+  //.finally(() => {
+   // addCardPopup.renderLoading(false);
+  //});
 }
 
 
@@ -216,4 +230,26 @@ function handleDelete(cardId) {
       });
   });
   cardDeletePositiv.open();
+}
+
+function handleLikeClick(card) {
+  if (card.isLiked) {
+    api
+    .removeCardLike(card._id)
+    .then((res) => {
+      card.updateLike(res.isLiked);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  } else {
+    api
+    .likesAddInformation(card._id)
+    .then((res) => {
+      card.updateLike(res.isLiked);
+    })
+    .catch((err) => {      
+      console.log(err);
+    }) 
+  }
 }
