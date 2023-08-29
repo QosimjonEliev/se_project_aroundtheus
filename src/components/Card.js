@@ -1,5 +1,5 @@
 class Card {
-  constructor({ name, link, liked, _id }, cardSelector, handleCardImage, handleDelete, userId, handleLikeClick ) {
+  constructor({ name, link, liked, _id }, cardSelector, handleCardImage, handleDelete, userId, handleLikeClick,  ) {
     this._name = name;
     this._link = link;
     this._cardSelector = cardSelector;
@@ -9,16 +9,10 @@ class Card {
     this._cardId = _id;
     this._liked = liked; 
     this._handlelikeClick = handleLikeClick;
+    //this._isLiked = isLiked;
   }
 
-
-  //_handleCardImage = (e) => {
-    //imagePreview.src = this._link;
-    //imagePreview.alt = this._name;
-    //imgPreviewTitle.textContent = this._name;
-  //};
-
-  _handleDeleteCard() {
+  handleDeleteCard() {
     this._cardElement.remove();
     this._cardElement = null;
   }
@@ -61,7 +55,6 @@ class Card {
   getView() {
     this._cardElement = this._getTemplate();
     this._setEventListeners();
-    //this._renderLike();
     this._cardElement.querySelector(".card__image").src = this._link;
     this._cardElement.querySelector(".card__image").alt = this._name;
     this._cardElement.querySelector(".card__title").textContent = this._name;
