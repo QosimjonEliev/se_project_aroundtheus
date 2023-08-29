@@ -83,10 +83,33 @@ function renderCard(cardData) {
     "#card-template",
     handleCardImage,
     handleDelete,
-    //handleLikeClick
+    handleLikeClick,
   );
   return card.getView();
 }
+
+function handleLikeClick(card) {
+  if (card.isLiked) {
+    api
+    .likesRemoveInformation(card._id)
+    .then((res) => {
+      card.updateLike(res.isLiked);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  } else {
+    api
+    .likesAddInformation(card._id)
+    .then((res) => {
+      card.updateLike(res.isLiked);
+    })
+    .catch((err) => {      
+      console.log(err);
+    }) 
+  }
+}
+
 function handleCardImage(name, link) {
   previewImagePopup.open(name, link);
 }
