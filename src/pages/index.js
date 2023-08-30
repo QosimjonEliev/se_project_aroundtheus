@@ -23,6 +23,7 @@ import {
   imgPreviewTitle,
   profileAvatarButton,
   submitDeleteButton,
+  cardSelector,
 } from "../utils/constants.js";
 
 import PopupWithCardDelete from "../components/PopupWithCardDelete.js";
@@ -78,31 +79,34 @@ const userInfo = new UserInfo({
 });
 
 function renderCard(cardData) {
-  const card = new Card(
-    cardData,
-    "#card-template",
+  const card = new Card({
+    name: cardData.name,
+    link: cardData.link,
+    isLiked: cardData.isLiked,
+    cardId: cardData._id,
     handleCardImage,
     handleDelete,
     handleLikeClick,
-  );
+    cardSelector,
+});
   return card.getView();
 }
 
-function handleLikeClick(card) {
-  if (card.isLiked) {
+function handleLikeClick(cardId) {
+  if (cardId.isLiked) {
     api
-    .likesRemoveInformation(card._id)
+    .likesRemoveInformation(cardId._id)
     .then((res) => {
-      card.updateLike(res.isLiked);
+      cardId.updateLike(res.isLiked);
     })
     .catch((err) => {
       console.log(err);
     });
   } else {
     api
-    .likesAddInformation(card._id)
+    .likesAddInformation(cardId._id)
     .then((res) => {
-      card.updateLike(res.isLiked);
+      cardId.updateLike(res.isLiked);
     })
     .catch((err) => {      
       console.log(err);
