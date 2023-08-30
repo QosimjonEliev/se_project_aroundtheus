@@ -79,16 +79,13 @@ const userInfo = new UserInfo({
 });
 
 function renderCard(cardData) {
-  const card = new Card({
-    name: cardData.name,
-    link: cardData.link,
-    isLiked: cardData.isLiked,
-    cardId: cardData._id,
+  const card = new Card(
+    cardData,
     handleCardImage,
     handleDelete,
     handleLikeClick,
     cardSelector,
-});
+);
   return card.getView();
 }
 
@@ -111,6 +108,7 @@ function handleLikeClick(cardId) {
     .catch((err) => {      
       console.log(err);
     }) 
+    "#card-template"
   }
 }
 
