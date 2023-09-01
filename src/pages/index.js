@@ -56,10 +56,9 @@ Promise.all([api.getUserInfo(), api.getInitialCards()])
     );
     cardSection.renderItems(initialCards);
   })
-  .catch((err) => {
+ .catch((err) => {
     console.log(err);
   });
-
 
 const addCardFormEl = document.querySelector("#add-card-modal");
 const addCardValidator = new FormValidator(config, addCardFormEl);
@@ -79,37 +78,35 @@ const userInfo = new UserInfo({
 });
 
 function renderCard(cardData) {
-  const card = new Card(
+  const card = new Card({
     cardData,
+    userId,
+    cardSelector,
     handleCardImage,
     handleDelete,
-    handleLikeClick,
-    cardSelector,
-);
-  return card.getView();
-}
 
-function handleLikeClick(cardId) {
-  if (cardId.isLiked) {
-    api
-    .likesRemoveInformation(cardId._id)
-    .then((res) => {
-      cardId.updateLike(res.isLiked);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+    handleLikeClick: (cardId) => {
+    if (cardId.isLiked) {
+      api
+      .addLikes(cardData._id)
+      .then((data) => {
+        cardId.updateLikes(data.likes);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   } else {
     api
-    .likesAddInformation(cardId._id)
-    .then((res) => {
-      cardId.updateLike(res.isLiked);
-    })
-    .catch((err) => {      
-      console.log(err);
-    }) 
-    "#card-template"
+      .removeLikes(cardData._id)
+      .then((data) => {
+        cardId.updateLikes(data.likes);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
+  }
+});
 }
 
 function handleCardImage(name, link) {
@@ -125,19 +122,19 @@ function handleProfileEditClick() {
 
 /*Event Handlers*/
 function handleProfileEditSubmit(inputValues) {
-  profileEditPopup.renderLoading(true)
+  profileEditPopup.renderLoading(true);
   api
-  .updateProfileInfo(inputValues.name, inputValues.about )
-  .then(() => {
-    userInfo.setUserInfo(inputValues.name, inputValues.about);
-    profileEditPopup.close();
-  })
-  .catch((err) => {
-    console.log(err);
-  })
-  .finally(() => {
-    profileEditPopup.renderLoading(false);
-  });
+    .updateProfileInfo(inputValues.name, inputValues.about)
+    .then(() => {
+      userInfo.setUserInfo(inputValues.name, inputValues.about);
+      profileEditPopup.close();
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+    .finally(() => {
+      profileEditPopup.renderLoading(false);
+    });
 }
 
 const profileEditPopup = new PopupWithForm(
@@ -147,7 +144,7 @@ const profileEditPopup = new PopupWithForm(
 
 const addCardPopup = new PopupWithForm(
   "#add-card-modal",
-  handleAddCardFormSubmit,
+  handleAddCardFormSubmit
 );
 
 /*Event Listners*/
@@ -163,20 +160,20 @@ addCardPopup.setEventListeners();
 previewImagePopup.setEventListeners();
 
 function handleAddCardFormSubmit(inputValues) {
-  addCardPopup.renderLoading(true)
+  addCardPopup.renderLoading(true);
   api
-  .addNewCardInformation(inputValues.name, inputValues.link)
-  .then((res) => {
-    const newCard = renderCard(res);
-    cardSection.addItem(newCard);
-    addCardPopup.close();
-  })
-  .finally(() => {
-    addCardPopup.renderLoading(false);
-  })
-  .catch((err) => {
-    console.log(err);
-  })
+    .addNewCardInformation(inputValues.name, inputValues.link)
+    .then((res) => {
+      const newCard = renderCard(res);
+      cardSection.addItem(newCard);
+      addCardPopup.close();
+    })
+    .finally(() => {
+      addCardPopup.renderLoading(false);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 }
 
 addNewCardButton.addEventListener("click", () => {
@@ -225,16 +222,16 @@ function handleDelete(card) {
   cardDeletePositiv.setSubmitAction(() => {
     cardDeletePositiv.renderLoading(true);
     api
-     .deleteCardInformation(card._id)
-     .then(() => {
-      card.handleDeleteCard();
-      cardDeletePositiv.close();
-     }) 
-     .catch((err) => {
-      console.log(err);
-     })
-     .finally(() => {
-      cardDeletePositiv.renderLoading(false);
-     });
+      .deleteCardInformation(card._id)
+      .then(() => {
+        card.handleDeleteCard();
+        cardDeletePositiv.close();
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+      .finally(() => {
+        cardDeletePositiv.renderLoading(false);
+      });
   });
 }
