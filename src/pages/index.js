@@ -48,8 +48,8 @@ Promise.all([api.getUserInfo(), api.getInitialCards()])
       {
         items: cardData,
         renderer: (data) => {
-          const cardElement = renderCard(data);
-          cardSection.addItem(cardElement);
+          const newCard = renderCard(data);
+          cardSection.addItem(newCard);
         },
       },
       cardsWrap
@@ -78,14 +78,15 @@ const userInfo = new UserInfo({
 });
 
 function renderCard(cardData) {
-  const card = new Card({
+  const card = new Card(
     cardData,
     userId,
     cardSelector,
     handleCardImage,
     handleDelete,
-
-    handleLikeClick: (cardId) => {
+    handleLikeClick,
+  );
+  function  handleLikeClick (cardId) {
     if (cardId.isLiked) {
       api
       .addLikes(cardData._id)
@@ -106,7 +107,7 @@ function renderCard(cardData) {
       });
   }
   }
-});
+return card.getView();
 }
 
 function handleCardImage(name, link) {
