@@ -56,8 +56,8 @@ Promise.all([api.getUserInfo(), api.getInitialCards()])
     );
     cardSection.renderItems(initialCards);
   })
- .catch((err) => {
-    console.log(err);
+  .catch((err) => {
+    console.error(err);
   });
 
 const addCardFormEl = document.querySelector("#add-card-modal");
@@ -80,21 +80,23 @@ const userInfo = new UserInfo({
 function renderCard(cardData) {
   const card = new Card(
     cardData,
-    userId,
     cardSelector,
     handleCardImage,
     handleDelete,
-    handleLikeClick,
+    userId,
+    handleLikeClick
   );
-  function  handleLikeClick (cardId) {
-    if (cardId.isLiked) {
-      api
+  return card.getView();
+}
+function handleLikeClick(cardId) {
+  if (cardId.isLiked) {
+    api
       .addLikes(cardData._id)
       .then((data) => {
         cardId.updateLikes(data.likes);
       })
       .catch((err) => {
-        console.log(err);
+        console.error(err);
       });
   } else {
     api
@@ -103,11 +105,9 @@ function renderCard(cardData) {
         cardId.updateLikes(data.likes);
       })
       .catch((err) => {
-        console.log(err);
+        console.error(err);
       });
   }
-  }
-return card.getView();
 }
 
 function handleCardImage(name, link) {
@@ -131,7 +131,7 @@ function handleProfileEditSubmit(inputValues) {
       profileEditPopup.close();
     })
     .catch((err) => {
-      console.log(err);
+      console.error(err);
     })
     .finally(() => {
       profileEditPopup.renderLoading(false);
@@ -173,7 +173,7 @@ function handleAddCardFormSubmit(inputValues) {
       addCardPopup.renderLoading(false);
     })
     .catch((err) => {
-      console.log(err);
+      console.error(err);
     });
 }
 
@@ -229,7 +229,7 @@ function handleDelete(card) {
         cardDeletePositiv.close();
       })
       .catch((err) => {
-        console.log(err);
+        console.error(err);
       })
       .finally(() => {
         cardDeletePositiv.renderLoading(false);

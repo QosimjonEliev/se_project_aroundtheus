@@ -1,5 +1,5 @@
 class Card {
-  constructor( { 
+  constructor( {
     name, 
     link, 
     isLiked, 
