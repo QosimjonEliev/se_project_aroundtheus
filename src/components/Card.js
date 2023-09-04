@@ -26,8 +26,8 @@ class Card {
 
   getView() {
     this._cardElement = this._getTemplate();
-    this._setEventListeners();
     this._cardLikeButton = this._cardElement.querySelector(".card__like-button");
+    this._setEventListeners();
     this._cardElement.querySelector(".card__like-button");
     this._cardElement.querySelector(".card__image").src = this._link;
     this._cardElement.querySelector(".card__image").alt = this._name;

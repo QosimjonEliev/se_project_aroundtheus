@@ -88,14 +88,14 @@ function renderCard(cardData) {
       handleCardLike: (cardID) => {
         if (card._cardIsLiked) {
           return api
-            .unlikeCard(cardID)
+            .likesRemoveInformation(cardID)
             .then((res) => {
               card.updateIsLiked(res.isLiked);
             })
             .catch((err) => console.error(err));
         } else {
           return api
-            .likeCard(cardID)
+            .likesAddInformation(cardID)
             .then((res) => {
               card.updateIsLiked(res.isLiked);
             })
