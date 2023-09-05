@@ -89,11 +89,11 @@ function renderCard(cardData) {
   return card.getView();
 }
 function handleCardLike(card) {
-  if (card.isLiked) {
+  if (card._isLiked) {
     api
       .likesRemoveInformation(card.cardId)
       .then((res) => {
-        card.updateLikes(res.isLiked);
+        card.updateLikes(res._isLiked);
       })
       .catch((err) => {
         console.log(err);
@@ -102,7 +102,8 @@ function handleCardLike(card) {
     api
       .likesAddInformation(card.cardId)
       .then((res) => {
-        card.updateLikes(res.isLiked);
+        card.updateLikes(res._isLiked
+          );
       })
       .catch((err) => {
         console.log(err);
