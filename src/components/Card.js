@@ -45,6 +45,7 @@ class Card {
 
   updateIsLiked(isLiked) {
     this._isLiked  = isLiked;
+    this.renderLikes();
   }
 
   handleDeleteCard() {
