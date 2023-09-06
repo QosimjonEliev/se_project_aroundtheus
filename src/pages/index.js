@@ -91,16 +91,16 @@ function renderCard(cardData) {
 function handleCardLike(card) {
   if (card._isLiked) {
     api
-      .likesRemoveInformation(card.cardId)
+      .likesRemoveInformation(card._cardId)
       .then((res) => {
-        card.updateLikes(res._isLiked);
+        cardData.updateLikes(res._isLiked);
       })
       .catch((err) => {
         console.log(err);
       });
   } else {
     api
-      .likesAddInformation(card.cardId)
+      .likesAddInformation(card._cardId)
       .then((res) => {
         card.updateLikes(res._isLiked
           );

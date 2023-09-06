@@ -2,8 +2,8 @@ class Card {
   constructor( {
     name, 
     link,  
-    cardId,
     isLiked,
+    _id,
   },
     cardSelector,
     handleCardImage,
@@ -14,8 +14,8 @@ class Card {
   ) {
     this._name = name;
     this._link = link;
-    this._cardId = cardId;
     this._isLiked = isLiked;
+    this._cardId = _id;
     this._cardSelector = cardSelector;
     this._handleCardImage = handleCardImage;
     this._handleDeleteCard = handleDelete;
