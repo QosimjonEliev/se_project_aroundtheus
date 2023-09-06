@@ -84,7 +84,7 @@ function renderCard(cardData) {
     handleCardImage,
     handleDelete,
     userId,
-    handleCardLike,
+    handleCardLike
   );
   return card.getView();
 }
@@ -93,7 +93,7 @@ function handleCardLike(card) {
     api
       .likesRemoveInformation(card._cardId)
       .then((res) => {
-        cardData.updateLikes(res._isLiked);
+        card.updateLikes(res._isLiked);
       })
       .catch((err) => {
         console.log(err);
@@ -102,8 +102,7 @@ function handleCardLike(card) {
     api
       .likesAddInformation(card._cardId)
       .then((res) => {
-        card.updateLikes(res._isLiked
-          );
+        card.updateLikes(res._isLiked);
       })
       .catch((err) => {
         console.log(err);
