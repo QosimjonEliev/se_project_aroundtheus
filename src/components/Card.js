@@ -62,9 +62,9 @@ class Card {
 
   _setEventListeners() {
 
-    this._cardLikeButton.addEventListener("click", () =>
+    this._cardLikeButton.addEventListener("click", () => {
       this._handleCardLike(this)
-    );
+  });
 
     this._cardElement
       .querySelector(".card__image")
