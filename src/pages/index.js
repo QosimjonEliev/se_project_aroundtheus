@@ -86,30 +86,49 @@ function renderCard(cardData) {
     userId,
     handleCardLike
   );
+
+  function handleDelete(card) {
+    cardDeletePositiv.open();
+    cardDeletePositiv.setSubmitAction(() => {
+      cardDeletePositiv.renderLoading(true);
+      api
+        .deleteCardInformation(card._cardId)
+        .then(() => {
+          card.handleDeleteCard();
+          cardDeletePositiv.close();
+        })
+        .catch((err) => {
+          console.error(err);
+        })
+        .finally(() => {
+          cardDeletePositiv.renderLoading(false);
+        });
+    });
+  }
+
+  function handleCardLike(card) {
+    if (card._isLiked) {
+      api
+        .likesRemoveInformation(card._cardId)
+        .then((res) => {
+          card.updateIsLiked(res.isLiked);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } else {
+      api
+        .likesAddInformation(card._cardId)
+        .then((res) => {
+          card.updateIsLiked(res.isLiked);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  }
   return card.getView();
 }
-function handleCardLike(card) {
-  if (card._isLiked) {
-    api
-      .likesRemoveInformation(card._cardId)
-      .then((res) => {
-        card.updateIsLiked(res.isLiked);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  } else {
-    api
-      .likesAddInformation(card._cardId)
-      .then((res) => {
-        card.updateIsLiked(res.isLiked);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }
-}
-
 function handleCardImage(name, link) {
   previewImagePopup.open(name, link);
 }
@@ -215,24 +234,4 @@ avatarInformation.setEventListeners();
 
 const cardDeletePositiv = new PopupWithCardDelete(
   "#card-delet-modal",
-  handleDelete
 );
-
-function handleDelete(card) {
-  cardDeletePositiv.open();
-  cardDeletePositiv.setSubmitAction(() => {
-    cardDeletePositiv.renderLoading(true);
-    api
-      .deleteCardInformation(card._id)
-      .then(() => {
-        card.handleDeleteCard();
-        cardDeletePositiv.close();
-      })
-      .catch((err) => {
-        console.error(err);
-      })
-      .finally(() => {
-        cardDeletePositiv.renderLoading(false);
-      });
-  });
-}
