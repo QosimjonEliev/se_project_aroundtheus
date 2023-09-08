@@ -26,7 +26,6 @@ class Card {
 
   getView() {
     this._cardElement = this._getTemplate();
-    
     this._handleCardDeleteButton = this._cardElement.querySelector(".card__delete-button");
     this._cardLikeButton = this._cardElement.querySelector(".card__like-button");
     this._setEventListeners();

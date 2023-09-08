@@ -2,11 +2,11 @@ import Popup from "./Popup.js";
 
 export default class PopupWithForm extends Popup {
   constructor(popupSelector, handleFormSubmit) {
-    super( popupSelector );
+    super(popupSelector);
     this._handleFormSubmit = handleFormSubmit;
     this._popupForm = this._popupElement.querySelector(".modal__form");
     this._submitButton = this._popupForm.querySelector(".modal__button");
-    this._submitButtonText = this._submitButton.textContent;
+    this._deleteCardButton = this._popupElement.querySelector("#modal__card-delete-button");
   }
 
   renderLoading(isLoading, loading = 'Saving...') {

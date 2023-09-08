@@ -77,6 +77,10 @@ const userInfo = new UserInfo({
   userProfileSelector: ".profile__image",
 });
 
+const cardDeletePositiv = new PopupWithCardDelete(
+  "#card-delet-modal",
+);
+
 function renderCard(cardData) {
   const card = new Card(
     cardData,
@@ -232,6 +236,3 @@ profileAvatarButton.addEventListener("click", () => {
 });
 avatarInformation.setEventListeners();
 
-const cardDeletePositiv = new PopupWithCardDelete(
-  "#card-delet-modal",
-);
