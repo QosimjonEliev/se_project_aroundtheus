@@ -222,7 +222,7 @@ function handleAvatarImage(inputValues) {
   api
     .avatarInformation(inputValues.avatar)
     .then((res) => {
-      userInfo.setUserInfo(res);
+      userInfo.setAvatarInfo(res);
     })
     .then(() => {
       avatarInformation.close();
