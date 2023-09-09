@@ -215,14 +215,13 @@ profileAvatarButton.addEventListener("click", () => {
 
   avatarInformation.open();
 });
-avatarInformation.setEventListeners();
 
 function handleAvatarImage(inputValues) {
   avatarInformation.renderLoading(true);
   api
     .avatarInformation(inputValues.avatar)
-    .then((res) => {
-      userInfo.setAvatarInfo(res);
+    .then(() => {
+      userInfo.setAvatarInfo(inputValues.avatar);
     })
     .then(() => {
       avatarInformation.close();
