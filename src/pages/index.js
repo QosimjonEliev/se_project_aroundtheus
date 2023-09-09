@@ -59,6 +59,20 @@ Promise.all([api.getUserInfo(), api.getInitialCards()])
   .catch((err) => {
     console.error(err);
   });
+  const avatarInformation = new PopupWithForm(
+    ".avatar__modal",
+    handleAvatarImage
+  );
+
+  const profileEditPopup = new PopupWithForm(
+    "#profile-edit-modal",
+    handleProfileEditSubmit
+  );
+  
+  const addCardPopup = new PopupWithForm(
+    "#add-card-modal",
+    handleAddCardFormSubmit
+  );
 
 const addCardFormEl = document.querySelector("#add-card-modal");
 const addCardValidator = new FormValidator(config, addCardFormEl);
@@ -161,16 +175,6 @@ function handleProfileEditSubmit(inputValues) {
     });
 }
 
-const profileEditPopup = new PopupWithForm(
-  "#profile-edit-modal",
-  handleProfileEditSubmit
-);
-
-const addCardPopup = new PopupWithForm(
-  "#add-card-modal",
-  handleAddCardFormSubmit
-);
-
 /*Event Listners*/
 profileEditButton.addEventListener("click", () => {
   const userData = userInfo.getUserInfo();
@@ -205,6 +209,14 @@ addNewCardButton.addEventListener("click", () => {
   addCardPopup.open();
 });
 
+profileAvatarButton.addEventListener("click", () => {
+  const userData = userInfo.getUserInfo();
+  profileTitleInput.value = userData.userName;
+
+  avatarInformation.open();
+});
+avatarInformation.setEventListeners();
+
 function handleAvatarImage(inputValues) {
   avatarInformation.renderLoading(true);
   api
@@ -222,17 +234,3 @@ function handleAvatarImage(inputValues) {
       avatarInformation.renderLoading(false);
     });
 }
-
-const avatarInformation = new PopupWithForm(
-  ".avatar__modal",
-  handleAvatarImage
-);
-
-profileAvatarButton.addEventListener("click", () => {
-  const userData = userInfo.getUserInfo();
-  profileTitleInput.value = userData.userName;
-
-  avatarInformation.open();
-});
-avatarInformation.setEventListeners();
-

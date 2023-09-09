@@ -68,8 +68,8 @@ export default class Api {
         });
     }
 
-    deleteCardInformation(card) {
-      return this._request(`${this._baseUrl}/cards/${card}`, {
+    deleteCardInformation(cardId) {
+      return this._request(`${this._baseUrl}/cards/${cardId}`, {
         method: "DELETE",
         headers: this._headers,
       })

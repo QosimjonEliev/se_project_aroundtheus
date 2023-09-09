@@ -74,7 +74,7 @@ class Card {
       });
 
       this._handleCardDeleteButton.addEventListener("click", () => {
-        this._handleDeleteCard(this);
+        this._handleDeleteCard(this)
       });
   }
 
