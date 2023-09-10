@@ -95,6 +95,8 @@ const cardDeletePositiv = new PopupWithCardDelete(
   "#card-delet-modal",
 );
 
+cardDeletePositiv.setEventListeners();
+
 function renderCard(cardData) {
   const card = new Card(
     cardData,
@@ -102,7 +104,7 @@ function renderCard(cardData) {
     handleCardImage,
     handleDelete,
     userId,
-    handleCardLike
+    handleCardLike,
   );
 
   function handleDelete(card) {

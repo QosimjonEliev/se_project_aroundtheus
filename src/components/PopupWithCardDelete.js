@@ -28,6 +28,6 @@ export default class PopupWithCardDelete extends Popup {
 
   setEventListeners() {
     super.setEventListeners();
-    this._deleteCardButton.addEventListener("submit", this._handleSubmit);
+    this._popupForm.addEventListener("submit", this._handleSubmit);
   }
 }
