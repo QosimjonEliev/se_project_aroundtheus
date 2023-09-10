@@ -63,6 +63,7 @@ Promise.all([api.getUserInfo(), api.getInitialCards()])
     ".avatar__modal",
     handleAvatarImage
   );
+  avatarInformation.setEventListeners();
 
   const profileEditPopup = new PopupWithForm(
     "#profile-edit-modal",

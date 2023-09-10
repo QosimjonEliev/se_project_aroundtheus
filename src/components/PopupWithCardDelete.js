@@ -16,7 +16,7 @@ export default class PopupWithCardDelete extends Popup {
     if (isLoading) {
       this._submitButton.textContent = loading;
     } else {
-      this._submitButton.textContent = this._submitButtonText;
+      this._submitButton.textContent = "Yes";
     }
   }
 
