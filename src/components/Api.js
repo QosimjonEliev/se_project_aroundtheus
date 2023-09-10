@@ -73,8 +73,8 @@ export default class Api {
         method: "DELETE",
         headers: this._headers,
       })
-        .then(() => {
-          return this._checResponse();
+        .then((response) => {
+          return response;
         })
         .finally(() => {
           console.log("Done deleting card");
