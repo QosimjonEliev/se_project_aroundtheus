@@ -83,6 +83,10 @@ const profileEditCardFormEl = document.querySelector("#profile-edit-modal");
 const addProfileValidator = new FormValidator(config, profileEditCardFormEl);
 addProfileValidator.enableValidation();
 
+const avatarFormEl = document.querySelector(`#avatar-modal`);
+const avatarValidator = new FormValidator(config, avatarFormEl);
+avatarValidator.enableValidation();
+
 const previewImagePopup = new PopupWithImage(`#preview-image-modal`);
 previewImagePopup.setEventListeners();
 
@@ -215,7 +219,7 @@ addNewCardButton.addEventListener("click", () => {
 profileAvatarButton.addEventListener("click", () => {
   const userData = userInfo.getUserInfo();
   profileTitleInput.value = userData.userName;
-
+  avatarValidator.toggleButtonState();
   avatarInformation.open();
 });
 
