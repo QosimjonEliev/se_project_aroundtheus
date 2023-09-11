@@ -24,6 +24,7 @@ import {
   profileAvatarButton,
   submitDeleteButton,
   cardSelector,
+  editAvatarForm,
 } from "../utils/constants.js";
 
 import PopupWithCardDelete from "../components/PopupWithCardDelete.js";
@@ -38,6 +39,12 @@ const api = new Api({
 });
 let cardSection;
 let userId;
+
+const userInfo = new UserInfo({
+  userNameSelector: ".profile__name",
+  userDescriptionSelector: ".profile__description",
+  userProfileSelector: ".profile__image",
+});
 
 Promise.all([api.getUserInfo(), api.getInitialCards()])
   .then(([userData, cardData]) => {
@@ -59,21 +66,25 @@ Promise.all([api.getUserInfo(), api.getInitialCards()])
   .catch((err) => {
     console.error(err);
   });
-  const avatarInformation = new PopupWithForm(
-    ".avatar__modal",
-    handleAvatarImage
-  );
-  avatarInformation.setEventListeners();
+const avatarInformation = new PopupWithForm(
+  "#modal-avatar",
+  handleAvatarImage
+);
+avatarInformation.setEventListeners();
 
-  const profileEditPopup = new PopupWithForm(
-    "#profile-edit-modal",
-    handleProfileEditSubmit
-  );
-  
-  const addCardPopup = new PopupWithForm(
-    "#add-card-modal",
-    handleAddCardFormSubmit
-  );
+const profileEditPopup = new PopupWithForm(
+  "#profile-edit-modal",
+  handleProfileEditSubmit
+);
+
+const addCardPopup = new PopupWithForm(
+  "#add-card-modal",
+  handleAddCardFormSubmit
+);
+
+const avatarFormEl = document.querySelector(`#modal-avatar`);
+const avatarValidator = new FormValidator(config, avatarFormEl);
+avatarValidator.enableValidation();
 
 const addCardFormEl = document.querySelector("#add-card-modal");
 const addCardValidator = new FormValidator(config, addCardFormEl);
@@ -83,22 +94,10 @@ const profileEditCardFormEl = document.querySelector("#profile-edit-modal");
 const addProfileValidator = new FormValidator(config, profileEditCardFormEl);
 addProfileValidator.enableValidation();
 
-const avatarFormEl = document.querySelector(`#avatar-modal`);
-const avatarValidator = new FormValidator(config, avatarFormEl);
-avatarValidator.enableValidation();
-
 const previewImagePopup = new PopupWithImage(`#preview-image-modal`);
 previewImagePopup.setEventListeners();
 
-const userInfo = new UserInfo({
-  userNameSelector: ".profile__name",
-  userDescriptionSelector: ".profile__description",
-  userProfileSelector: ".profile__image",
-});
-
-const cardDeletePositiv = new PopupWithCardDelete(
-  "#card-delet-modal",
-);
+const cardDeletePositiv = new PopupWithCardDelete("#card-delet-modal");
 
 cardDeletePositiv.setEventListeners();
 
@@ -109,7 +108,7 @@ function renderCard(cardData) {
     handleCardImage,
     handleDelete,
     userId,
-    handleCardLike,
+    handleCardLike
   );
 
   function handleDelete(card) {
