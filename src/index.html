@@ -18,21 +18,20 @@
       </header>
       <main class="content">
         <section class="profile page__section">
-          <img
-            src="<%=require('./images/jacques-cousteau.png')%>"
-            alt="Avatar"
-            class="profile__image"
-          />
+          <div class="profile__avatar-container">
+            <img src="" class="profile__image" alt="profile image" />
+            <button class="profile__avatar-select" type="button"></button>
+          </div>
           <div class="profile__container">
             <div class="profile__info">
-              <h1 class="profile__name">Jacques Cousteau</h1>
+              <h1 class="profile__name"></h1>
               <button
                 type="button"
                 class="profile__edit-button"
                 id="profile-edit-button"
               ></button>
             </div>
-            <h2 class="profile__description">Explorer</h2>
+            <h2 class="profile__description"></h2>
           </div>
           <button
             type="button"
@@ -75,7 +74,7 @@
             <input
               class="modal__name"
               type="text"
-              name="description"
+              name="about"
               id="profile-description-input"
               placeholder="Description"
               minlength="2"
@@ -87,14 +86,10 @@
               id="profile-description-input-error"
             ></span>
           </label>
-          <button 
-          class="modal__button" 
-          type="submit"
-          >Save</button>
+          <button class="modal__button" type="submit">Save</button>
         </form>
       </div>
     </div>
-
     <!--Add card modal-->
     <div class="modal" id="add-card-modal">
       <div class="modal__container">
@@ -129,17 +124,15 @@
             />
             <span class="modal__error" id="add-card-link-input-error"></span>
           </label>
-          <button 
-          class="modal__button" 
-          type="submit"
-          id="modal__button-add"
-          >Save</button>
+          <button class="modal__button" type="submit" id="modal__button-add">
+            Save
+          </button>
         </form>
       </div>
     </div>
     <!--Image preview-->
     <div class="modal" id="preview-image-modal">
-      <div class="modal__preview-container modal__container">
+      <div class="modal__container-image">
         <button
           class="modal__close"
           type="button"
@@ -149,6 +142,55 @@
         <h6 class="modal__image-title"></h6>
       </div>
     </div>
+
+    <!--Delete card modal-->
+    <div class="modal" id="card-delet-modal">
+      <div class="modal__container">
+        <form class="modal__form">
+          <button
+            class="modal__close"
+            id="modal-card-delete"
+            type="button"
+          ></button>
+          <h4 class="modal__heading-delete">Are you sure?</h4>
+          <button
+            class="modal__button"
+            id="modal-delete-positive"
+            type="submit"
+          >
+            Yes
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <!--Edit avatar-->
+    <div class="modal avatar__modal" id="modal-avatar">
+      <div class="modal__container avatar__modal-change">
+        <button
+          class="modal__close"
+          id="modal-card-close-button"
+          type="button"
+        ></button>
+        <h4 class="modal__heading">Change profile picture</h4>
+
+        <form class="modal__form" id="modal_add-card-form">
+          <label class="modal__label">
+            <input
+              type="url"
+              name="avatar"
+              class="modal__name"
+              id="modal-avatar-input"
+              placeholder="image link"
+              required
+            />
+            <span class="modal__error" id="modal-avatar-input-error"></span>
+          </label>
+          <button class="modal__button" type="submit" id="avatar-change">Save</button>
+        </form>
+      </div>
+    </div>
+
     <template id="card-template">
       <li class="card">
         <button

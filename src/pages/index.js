@@ -21,7 +21,70 @@ import {
   config,
   imagePreview,
   imgPreviewTitle,
+  profileAvatarButton,
+  submitDeleteButton,
+  cardSelector,
+  editAvatarForm,
 } from "../utils/constants.js";
+
+import PopupWithCardDelete from "../components/PopupWithCardDelete.js";
+import Api from "../components/Api.js";
+
+const api = new Api({
+  baseUrl: "https://around-api.en.tripleten-services.com/v1",
+  headers: {
+    authorization: "b316ef3e-b4c0-4fe5-a1ba-6f1194cf61a8",
+    "Content-Type": "application/json",
+  },
+});
+let cardSection;
+let userId;
+
+const userInfo = new UserInfo({
+  userNameSelector: ".profile__name",
+  userDescriptionSelector: ".profile__description",
+  userProfileSelector: ".profile__image",
+});
+
+Promise.all([api.getUserInfo(), api.getInitialCards()])
+  .then(([userData, cardData]) => {
+    userId = userData._id;
+    userInfo.setUserInfo(userData.name, userData.about);
+    userInfo.setAvatarInfo(userData.avatar);
+    cardSection = new Section(
+      {
+        items: cardData,
+        renderer: (data) => {
+          const newCard = renderCard(data);
+          cardSection.addItem(newCard);
+        },
+      },
+      cardsWrap
+    );
+    cardSection.renderItems(initialCards);
+  })
+  .catch((err) => {
+    console.error(err);
+  });
+const avatarInformation = new PopupWithForm(
+  "#modal-avatar",
+  handleAvatarImage
+);
+avatarInformation.setEventListeners();
+
+const profileEditPopup = new PopupWithForm(
+  "#profile-edit-modal",
+  handleProfileEditSubmit
+);
+
+const addCardPopup = new PopupWithForm(
+  "#add-card-modal",
+  handleAddCardFormSubmit
+);
+
+const avatarFormEl = document.querySelector(`#modal-avatar`);
+const avatarValidator = new FormValidator(config, avatarFormEl);
+avatarValidator.enableValidation();
 
 const addCardFormEl = document.querySelector("#add-card-modal");
 const addCardValidator = new FormValidator(config, addCardFormEl);
@@ -34,13 +97,60 @@ addProfileValidator.enableValidation();
 const previewImagePopup = new PopupWithImage(`#preview-image-modal`);
 previewImagePopup.setEventListeners();
 
-const userInfo = new UserInfo({
-  userNameSelector: ".profile__name",
-  userDescriptionSelector: ".profile__description",
-});
+const cardDeletePositiv = new PopupWithCardDelete("#card-delet-modal");
+
+cardDeletePositiv.setEventListeners();
 
 function renderCard(cardData) {
-  const card = new Card(cardData, "#card-template", handleCardImage);
+  const card = new Card(
+    cardData,
+    cardSelector,
+    handleCardImage,
+    handleDelete,
+    userId,
+    handleCardLike
+  );
+
+  function handleDelete(card) {
+    cardDeletePositiv.open();
+    cardDeletePositiv.setSubmitAction(() => {
+      cardDeletePositiv.renderLoading(true);
+      api
+        .deleteCardInformation(card._cardId)
+        .then(() => {
+          card.handleDeleteCard();
+          cardDeletePositiv.close();
+        })
+        .catch((err) => {
+          console.error(err);
+        })
+        .finally(() => {
+          cardDeletePositiv.renderLoading(false);
+        });
+    });
+  }
+
+  function handleCardLike(card) {
+    if (card._isLiked) {
+      api
+        .likesRemoveInformation(card._cardId)
+        .then((res) => {
+          card.updateIsLiked(res.isLiked);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } else {
+      api
+        .likesAddInformation(card._cardId)
+        .then((res) => {
+          card.updateIsLiked(res.isLiked);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  }
   return card.getView();
 }
 function handleCardImage(name, link) {
@@ -56,31 +166,20 @@ function handleProfileEditClick() {
 
 /*Event Handlers*/
 function handleProfileEditSubmit(inputValues) {
-  userInfo.setUserInfo(inputValues);
-  profileEditPopup.close();
+  profileEditPopup.renderLoading(true);
+  api
+    .updateProfileInfo(inputValues.name, inputValues.about)
+    .then(() => {
+      userInfo.setUserInfo(inputValues.name, inputValues.about);
+      profileEditPopup.close();
+    })
+    .catch((err) => {
+      console.error(err);
+    })
+    .finally(() => {
+      profileEditPopup.renderLoading(false);
+    });
 }
-
-const profileEditPopup = new PopupWithForm(
-  "#profile-edit-modal",
-  handleProfileEditSubmit
-);
-
-const addCardPopup = new PopupWithForm(
-  "#add-card-modal",
-  handleAddCardFormSubmit
-);
-
-const cardSection = new Section(
-  {
-    items: initialCards,
-    renderer: (data) => {
-      const cardElement = renderCard(data);
-      cardSection.addItem(cardElement);
-    },
-  },
-  cardsWrap
-);
-cardSection.renderItems(initialCards);
 
 /*Event Listners*/
 profileEditButton.addEventListener("click", () => {
@@ -95,13 +194,48 @@ addCardPopup.setEventListeners();
 previewImagePopup.setEventListeners();
 
 function handleAddCardFormSubmit(inputValues) {
-  const { name, link } = inputValues;
-  const card = renderCard({ name, link });
-  cardSection.addItem(card);
-  addCardPopup.close();
+  addCardPopup.renderLoading(true);
+  api
+    .addNewCardInformation(inputValues.name, inputValues.link)
+    .then((res) => {
+      const newCard = renderCard(res);
+      cardSection.addItem(newCard);
+      addCardPopup.close();
+    })
+    .finally(() => {
+      addCardPopup.renderLoading(false);
+    })
+    .catch((err) => {
+      console.error(err);
+    });
 }
 
 addNewCardButton.addEventListener("click", () => {
   addCardValidator.toggleButtonState();
   addCardPopup.open();
 });
+
+profileAvatarButton.addEventListener("click", () => {
+  const userData = userInfo.getUserInfo();
+  profileTitleInput.value = userData.userName;
+  avatarValidator.toggleButtonState();
+  avatarInformation.open();
+});
+
+function handleAvatarImage(inputValues) {
+  avatarInformation.renderLoading(true);
+  api
+    .avatarInformation(inputValues.avatar)
+    .then(() => {
+      userInfo.setAvatarInfo(inputValues.avatar);
+    })
+    .then(() => {
+      avatarInformation.close();
+    })
+    .catch((err) => {
+      console.error(err);
+    })
+    .finally(() => {
+      avatarInformation.renderLoading(false);
+    });
+}
